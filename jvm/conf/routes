@@ -1,9 +1,10 @@
 GET         /search                 com.searchmvc.controllers.SearchController.home()
-GET			/                       todomvc.example.DmdController.home
+GET			/                       com.searchmvc.controllers.SearchController.home()
 
 GET     /vtm/:id            todomvc.example.DmdController.vtm(id: Long)
 GET     /vmp/:id            todomvc.example.DmdController.vmp(id: Long)
 GET     /amp/:id            todomvc.example.DmdController.amp(id: Long)
+GET     /vmpp/:id            todomvc.example.DmdController.vmpp(id: Long)
 GET     /ampp/:id            todomvc.example.DmdController.ampp(id: Long)
 GET     /amps/:vmpId            todomvc.example.DmdController.ampsByVmpParent(vmpId: String)
 

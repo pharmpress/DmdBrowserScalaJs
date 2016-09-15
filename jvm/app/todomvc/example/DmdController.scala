@@ -40,6 +40,12 @@ class DmdController @Inject() (contentService: ContentService) extends Controlle
     }
   }
 
+  def vmpp(id: Long) = Action.async {
+    contentService.getVmpp(id.toString).map {
+      _.fold(BadRequest(s"Couldn't find VMPP with id $id"))(vmpp => Ok(views.html.vmpp(vmpp)))
+    }
+  }
+
   def ampp(id: Long) = Action.async {
     contentService.getAmpp(id.toString).map {
       _.fold(BadRequest(s"Couldn't find AMPP with id $id"))(ampp => Ok(views.html.ampp(ampp)))

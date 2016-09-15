@@ -1,0 +1,39 @@
+@import com.pharmpress.common.model.dmd.Vmpp
+
+@(vmpp: Vmpp)
+
+@_main() {
+  <div class="page-header">
+  <h1>Virtual Medicinal Product Pack</h1>
+    </div>
+  <table class="table table-striped">
+    <tr><td>id</td><td>@vmpp.id</td></tr>
+    <tr><td>invalid</td><td>@vmpp.invalid</td></tr>
+    <tr><td>name</td><td>@vmpp.name</td></tr>
+    <tr><td>Virtual medicinal product</td><td><a href="/vmp/@vmpp.vmpId">@vmpp.vmpId</a></td></tr>
+    <tr>
+      <td>Virtual therapeutic moiety</td>
+      <td>
+      @if(vmpp.vtmId.nonEmpty) {
+        <a href="/vtm/@vmpp.vtmId.get">@vmpp.vtmId</a>
+      }
+      </td>
+    </tr>
+    <tr><td>quantityVal</td><td>@vmpp.quantityVal</td></tr>
+    <tr><td>quantityUOM</td><td>@vmpp.quantityUOM</td></tr>
+    <tr><td>combPack</td><td>@vmpp.combPack</td></tr>
+  </table>
+
+  @if(vmpp.drugTariffInfo.nonEmpty) {
+    <h2>Drug Tariff Info</h2>
+    <table class="table table-striped">
+      <tr><td>Payment category</td><td>@vmpp.drugTariffInfo.map(_.paymentCategory)</td></tr>
+      <tr><td>Price</td><td>@vmpp.drugTariffInfo.map(_.price)</td></tr>
+      <tr><td>Date</td><td>@vmpp.drugTariffInfo.map(_.date)</td></tr>
+      <tr><td>Previous price</td><td>@vmpp.drugTariffInfo.map(_.prevPrice)</td></tr>
+    </table>
+  }
+
+  <h2>Actual Medicinal Product Packs</h2>
+
+}
