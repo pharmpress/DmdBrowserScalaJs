@@ -39,4 +39,10 @@ class DmdController @Inject() (contentService: ContentService) extends Controlle
     }
   }
 
+  def ampp(id: Long) = Action.async {
+    contentService.getAmpp(id.toString).map {
+      _.fold(BadRequest(s"Couldn't find AMPP with id $id"))(ampp => Ok(views.html.ampp(ampp)))
+    }
+  }
+
 }

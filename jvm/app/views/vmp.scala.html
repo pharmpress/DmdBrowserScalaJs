@@ -3,8 +3,10 @@
 @(vmp: Vmp)
 
 @_main() {
+  <div class="page-header">
   <h1>Virtual Medicinal Product</h1>
-  <table>
+    </div>
+  <table class="table table-striped">
     <tr><td>ID</td><td>@vmp.id</td></tr>
     <tr><td>Valid date</td><td>@vmp.validDate</td></tr>
     <tr><td>Previous ID</td><td>@vmp.idPrev</td></tr>
@@ -35,13 +37,13 @@
     <tr><td>UdfsUOM             </td><td>@vmp.udfsUOM            </td></tr>
     <tr><td>UnitDoseUOM         </td><td>@vmp.unitDoseUOM        </td></tr>
     <tr><td>OntDrugForm         </td><td>@vmp.ontDrugForm        </td></tr>
-    <tr><td>DrugForm            </td><td>@vmp.drugForm           </td></tr>
-    <tr><td>DrugRoute           </td><td>@vmp.drugRoute          </td></tr>
-    @*controlDrugInfo: ControlDrugInfo,*@
+    <tr><td>DrugForm            </td><td>@vmp.drugForm.map(_.form)           </td></tr>
+    <tr><td>DrugRoute           </td><td>@vmp.drugRoute.map(_.map(_.route).mkString(", "))          </td></tr>
   </table>
 
   @if(vmp.virtualProductIngredients.nonEmpty) {
-    <table>
+    <h2>Virtual Product Ingredients</h2>
+    <table class="table table-striped">
       <tr>
         <th>Substance</th>
         <th>Basis of strength</th>
@@ -64,4 +66,14 @@
       }
     </table>
   }
+
+  <h2>Controlled Drug Information</h2>
+  <table class="table table-striped">
+    <tr><td>Category</td><td>@vmp.controlDrugInfo.category</td></tr>
+    <tr><td>Category date</td><td>@vmp.controlDrugInfo.categoryDate</td></tr>
+    <tr><td>Previous category</td><td>@vmp.controlDrugInfo.categoryPrev</td></tr>
+  </table>
+
+  <h2>Actual Medicinal Products</h2>
+
 }

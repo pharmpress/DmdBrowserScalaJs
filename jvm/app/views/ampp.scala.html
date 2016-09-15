@@ -1,0 +1,80 @@
+@import com.pharmpress.common.model.dmd.Ampp
+
+@(ampp: Ampp)
+
+@_main() {
+  <div class="page-header">
+<h1>Actual Medicinal Product Pack</h1>
+    </div>
+  <table class="table table-striped">
+    <tr><td>id</td><td>@ampp.id</td></tr>
+  <tr><td>invalid</td><td>@ampp.invalid</td></tr>
+  <tr><td>name</td><td>@ampp.name</td></tr>
+  <tr><td>abbrevName</td><td>@ampp.abbrevName</td></tr>
+  <tr><td>Actual medicinal product</td><td><a href="/amp/@ampp.ampId">@ampp.ampId</a></td></tr>
+  <tr><td>Virtual medicinal product pack</td><td><a href="/vmpp/@ampp.vmppId">@ampp.vmppId</a></td></tr>
+  <tr><td>Virtual medicinal product</td><td><a href="/vmp/@ampp.vmpId">@ampp.vmpId</a></td></tr>
+    <tr>
+      <td>Virutal therapeutic moiety</td>
+      <td>
+      @if(ampp.vtmId.nonEmpty) {
+        <a href="/vtm/@ampp.vtmId.get">@ampp.vtmId</a>
+      }
+      </td>
+    </tr>
+  <tr><td>combPack</td><td>@ampp.combPack</td></tr>
+  <tr><td>legalCategory</td><td>@ampp.legalCategory</td></tr>
+  <tr><td>subPackInfo</td><td>@ampp.subPackInfo</td></tr>
+  <tr><td>discontinued</td><td>@ampp.discontinued</td></tr>
+  <tr><td>discontinuedDate</td><td>@ampp.discontinuedDate</td></tr>
+    </table>
+
+  @if(ampp.appliancePackInformation.nonEmpty) {
+    <h2>Appliance Pack Information</h2>
+    <table class="table table-striped">
+      <tr><td>Reimbursement status</td><td>@ampp.appliancePackInformation.map(_.reimbStatus)</td></tr>
+      <tr><td>Reimbursement status date</td><td>@ampp.appliancePackInformation.map(_.reimbStatusDate)</td></tr>
+      <tr><td>Previous reimbursement status</td><td>@ampp.appliancePackInformation.map(_.reimbStatusPrev)</td></tr>
+      <tr><td>Pack order number</td><td>@ampp.appliancePackInformation.map(_.packOrderNo)</td></tr>
+    </table>
+  }
+
+  @if(ampp.drugProductPrescribInfo.nonEmpty) {
+    <h2>Drug Product Prescribing Information</h2>
+    <table class="table table-striped">
+      <tr><td>schedule2</td><td>@ampp.drugProductPrescribInfo.map(_.schedule2)</td></tr>
+      <tr><td>acbs</td><td>@ampp.drugProductPrescribInfo.map(_.acbs)</td></tr>
+      <tr><td>padm</td><td>@ampp.drugProductPrescribInfo.map(_.padm)</td></tr>
+      <tr><td>fp10Mda</td><td>@ampp.drugProductPrescribInfo.map(_.fp10Mda)</td></tr>
+      <tr><td>schedule1</td><td>@ampp.drugProductPrescribInfo.map(_.schedule1)</td></tr>
+      <tr><td>hospital</td><td>@ampp.drugProductPrescribInfo.map(_.hospital)</td></tr>
+      <tr><td>nurseFormulary</td><td>@ampp.drugProductPrescribInfo.map(_.nurseFormulary)</td></tr>
+      <tr><td>extendedNurseFormulary</td><td>@ampp.drugProductPrescribInfo.map(_.extendedNurseFormulary)</td></tr>
+      <tr><td>dentistFormulary</td><td>@ampp.drugProductPrescribInfo.map(_.dentistFormulary)</td></tr>
+    </table>
+  }
+
+  @if(ampp.medicinalProductPrice.nonEmpty) {
+    <h2>Medicinal Product Price</h2>
+    <table class="table table-striped">
+      <tr><td>Price</td><td>@ampp.medicinalProductPrice.map(_.price)</td></tr>
+      <tr><td>Price date</td><td>@ampp.medicinalProductPrice.map(_.priceDate)</td></tr>
+      <tr><td>Previous price</td><td>@ampp.medicinalProductPrice.map(_.pricePrev)</td></tr>
+      <tr><td>Price basis</td><td>@ampp.medicinalProductPrice.map(_.priceBasis)</td></tr>
+    </table>
+  }
+
+  @if(ampp.reimbursementInfo.nonEmpty) {
+    <h2>Reimbursement Information</h2>
+    <table class="table table-striped">
+      <tr><td>prescripCharges</td><td>@ampp.reimbursementInfo.map(_.prescripCharges)</td></tr>
+      <tr><td>dispFees</td><td>@ampp.reimbursementInfo.map(_.dispFees)</td></tr>
+      <tr><td>brokenBulk</td><td>@ampp.reimbursementInfo.map(_.brokenBulk)</td></tr>
+      <tr><td>calendarPack</td><td>@ampp.reimbursementInfo.map(_.calendarPack)</td></tr>
+      <tr><td>specialContainer</td><td>@ampp.reimbursementInfo.map(_.specialContainer)</td></tr>
+      <tr><td>dnd</td><td>@ampp.reimbursementInfo.map(_.dnd)</td></tr>
+      <tr><td>fp34d</td><td>@ampp.reimbursementInfo.map(_.fp34d)</td></tr>
+    </table>
+  }
+
+}
