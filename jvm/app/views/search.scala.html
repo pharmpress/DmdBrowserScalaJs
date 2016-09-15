@@ -3,7 +3,7 @@
 @_main() {
 
 <section ng-controller="searchCtrl">
-    <heaer id="header" todo-test="test">
+    <header id="header" todo-test="test">
         <div class="page-header">
             <h1>Search</h1>
         </div>
@@ -15,7 +15,7 @@
                 </span>
             </div>
         </form>
-    </heaer>
+    </header>
     <section>
         <p ng-repeat="result in results"><span ng-cloak><a ng-href="/{{result.type}}/{{result.id}}">{{result.name}}</a></span></p>
     </section>
