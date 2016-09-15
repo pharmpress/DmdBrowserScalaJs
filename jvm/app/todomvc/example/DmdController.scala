@@ -32,10 +32,11 @@ class DmdController @Inject() (contentService: ContentService) extends Controlle
     }
   }
 
-  def amp(id: Long) = Action {
-    val amp = Amp("123456", None, "amp", None, "", None, None, "", None, None, None, None, None, None, "", "",
-      None, "", None, None, Some(Seq(LicensedRoute("123456", "route1"), LicensedRoute("123456", "route2"))), None, None)
-    Ok(views.html.amp(amp))
+  def amp(id: Long) = Action.async {
+
+    contentService.getAmp(id.toString).map {
+      _.fold(BadRequest(s"Couldn't find AMP with id $id"))(amp => Ok(views.html.amp(amp)))
+    }
   }
 
 }
