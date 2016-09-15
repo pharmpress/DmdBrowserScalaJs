@@ -15,9 +15,16 @@
                 </span>
             </div>
         </form>
+      <div class="btn-group" data-toggle="buttons">
+        <a href="javascript:void(0)" ng-click="typeFilter = 'vtm'" ng-class="{ 'active' : button == 'vtm' }" class="btn btn-default">VTM <span class="badge">{{(results | filter:{type: 'vtm'}:true).length}}</span></a>
+        <a href="javascript:void(0)" ng-click="typeFilter = 'vmp'" ng-class="{ 'active' : button == 'vmp' }" class="btn btn-default">VMP <span class="badge">{{(results | filter:{type: 'vmp'}:true).length}}</span></a>
+        <a href="javascript:void(0)" ng-click="typeFilter = 'vmpp'" ng-class="{ 'active' : button == 'vmpp' }" class="btn btn-default">VMPP <span class="badge">{{(results | filter:{type: 'vmpp'}:true).length}}</span></a>
+        <a href="javascript:void(0)" ng-click="typeFilter = 'amp'" ng-class="{ 'active' : button == 'amp' }" class="btn btn-default">AMP <span class="badge">{{(results | filter:{type: 'amp'}:true).length}}</span></a>
+        <a href="javascript:void(0)" ng-click="typeFilter = 'ampp'" ng-class="{ 'active' : button == 'ampp' }" class="btn btn-default">AMPP <span class="badge">{{(results | filter:{type: 'ampp'}:true).length}}</span></a>
+      </div>
     </header>
     <section id="search-results">
-        <p ng-repeat="result in results"><span ng-cloak><span class="badge">{{result.type}}</span> <a ng-href="/{{result.type}}/{{result.id}}">{{result.name}}</a></span></p>
+        <p ng-repeat="result in results | filter:{type: typeFilter}:true"><span ng-cloak><span class="badge">{{result.type}}</span> <a ng-href="/{{result.type}}/{{result.id}}">{{result.name}}</a></span></p>
     </section>
 </section>
 }

@@ -2,7 +2,7 @@ package com.searchmvc.controllers
 
 import javax.inject.Inject
 
-import com.pharmpress.common.model.dmd.{Amp, Ampp, Vmp, Vtm}
+import com.pharmpress.common.model.dmd.{Amp, Ampp, Vmp, Vmpp, Vtm}
 import com.pharmpress.dmdbrowser.service.SearchService
 import com.searchmvc.SearchResult
 import play.api.libs.json.Json
@@ -32,6 +32,7 @@ class SearchController @Inject()(searchService: SearchService) extends Controlle
           results.map(d => SearchResult(d.id, d.name, d match {
             case _: Amp => "amp"
             case _: Vmp => "vmp"
+            case _: Vmpp => "vmpp"
             case _: Vtm => "vtm"
             case _: Ampp => "ampp"
           }))
