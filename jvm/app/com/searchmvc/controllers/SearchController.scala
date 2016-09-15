@@ -24,17 +24,16 @@ class SearchController @Inject()(searchService: SearchService) extends Controlle
   }
 
   def search(query: String) = Action.async {
-
     for {
       results <- searchService.searchAll(query)
     } yield {
       Ok(
         Pickle.intoString(
-            results.map(d => SearchResult(d.id, d.name,d match {
-            case _:Amp => "amp"
-            case _:Vmp=> "vmp"
-            case _:Vtm=> "vtm"
-            case _:Ampp=> "ampp"
+          results.map(d => SearchResult(d.id, d.name, d match {
+            case _: Amp => "amp"
+            case _: Vmp => "vmp"
+            case _: Vtm => "vtm"
+            case _: Ampp => "ampp"
           }))
         )
       )

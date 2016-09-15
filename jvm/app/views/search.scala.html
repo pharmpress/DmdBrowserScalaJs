@@ -2,23 +2,22 @@
 
 @_main() {
 
-
-        <section ng-controller="searchCtrl">
-            <heaer id="header" todo-test="test">
-                <div class="page-header">
-                    <h1>Search</h1>
-                </div>
-                <form id="todo-form">
-                    <div class="input-group">
-                        <input type="text" class="form-control" id="new-query" placeholder="What needs to be done?" ng-model="query" autofocus/>
-                        <span class="input-group-btn">
-                            <button id="clear-completed" class="btn btn-default" type="button" ng-click="controller.search(query)">search</button>
-                        </span>
-                    </div>
-                </form>
-            </heaer>
-            <section>
-                <p>Results</p>
-            </section>
-        </section>
+<section ng-controller="searchCtrl">
+    <heaer id="header" todo-test="test">
+        <div class="page-header">
+            <h1>Search</h1>
+        </div>
+        <form id="todo-form">
+            <div class="input-group">
+                <input type="text" class="form-control" id="new-query" placeholder="Enter DM+D search term" ng-model="query" autofocus/>
+                <span class="input-group-btn">
+                    <button id="clear-completed" class="btn btn-default" type="button" ng-click="controller.search(query)">search</button>
+                </span>
+            </div>
+        </form>
+    </heaer>
+    <section>
+        <p ng-repeat="result in results"><span ng-cloak><a ng-href="/{{result.type}}/{{result.id}}">{{result.name}}</a></span></p>
+    </section>
+</section>
 }
