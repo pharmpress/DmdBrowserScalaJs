@@ -1,0 +1,67 @@
+@import com.pharmpress.common.model.dmd.Vmp
+
+@(vmp: Vmp)
+
+@_main() {
+  <h1>Virtual Medicinal Product</h1>
+  <table>
+    <tr><td>ID</td><td>@vmp.id</td></tr>
+    <tr><td>Valid date</td><td>@vmp.validDate</td></tr>
+    <tr><td>Previous ID</td><td>@vmp.idPrev</td></tr>
+    <tr><td>Virtual therapeutic moiety</td><td>
+      @if(vmp.vtmId.nonEmpty) {
+        <a href="/vtm/@vmp.vtmId.get">@vmp.vtmId</a>
+      }
+    </td></tr>
+    <tr><td>Invalid</td><td>@vmp.invalid</td></tr>
+
+    <tr><td>Name                </td><td>@vmp.name               </td></tr>
+    <tr><td>AbbrevName          </td><td>@vmp.abbrevName         </td></tr>
+    <tr><td>BasisOfName         </td><td>@vmp.basisOfName        </td></tr>
+    <tr><td>NameDate            </td><td>@vmp.nameDate           </td></tr>
+    <tr><td>NamePrev            </td><td>@vmp.namePrev           </td></tr>
+    <tr><td>BasisOfNamePrev     </td><td>@vmp.basisOfNamePrev    </td></tr>
+    <tr><td>NameChangeReason    </td><td>@vmp.nameChangeReason   </td></tr>
+    <tr><td>CombProd            </td><td>@vmp.combProd           </td></tr>
+    <tr><td>PresStatus          </td><td>@vmp.presStatus         </td></tr>
+    <tr><td>SugarFree           </td><td>@vmp.sugarFree          </td></tr>
+    <tr><td>GlutenFree          </td><td>@vmp.glutenFree         </td></tr>
+    <tr><td>PreservativeFree    </td><td>@vmp.preservativeFree   </td></tr>
+    <tr><td>CfcFree             </td><td>@vmp.cfcFree            </td></tr>
+    <tr><td>NonAvailable        </td><td>@vmp.nonAvailable       </td></tr>
+    <tr><td>NonAvailableDate    </td><td>@vmp.nonAvailableDate   </td></tr>
+    <tr><td>DfInd               </td><td>@vmp.dfInd              </td></tr>
+    <tr><td>Udfs                </td><td>@vmp.udfs               </td></tr>
+    <tr><td>UdfsUOM             </td><td>@vmp.udfsUOM            </td></tr>
+    <tr><td>UnitDoseUOM         </td><td>@vmp.unitDoseUOM        </td></tr>
+    <tr><td>OntDrugForm         </td><td>@vmp.ontDrugForm        </td></tr>
+    <tr><td>DrugForm            </td><td>@vmp.drugForm           </td></tr>
+    <tr><td>DrugRoute           </td><td>@vmp.drugRoute          </td></tr>
+    @*controlDrugInfo: ControlDrugInfo,*@
+  </table>
+
+  @if(vmp.virtualProductIngredients.nonEmpty) {
+    <table>
+      <tr>
+        <th>Substance</th>
+        <th>Basis of strength</th>
+        <th>Basis substance</th>
+        <th>Strength numerator</th>
+        <th>Strength numerator unit</th>
+        <th>Strength denominator</th>
+        <th>Strength denominator unit</th>
+      </tr>
+      @for(ingredient <- vmp.virtualProductIngredients.get) {
+        <tr>
+          <td>@ingredient.ingredientSubstance.name</td>
+          <td>@ingredient.basisStrength</td>
+          <td>@ingredient.basisSubstance.map(_.name)</td>
+          <td>@ingredient.strengthNumeratorVal</td>
+          <td>@ingredient.strengthNumeratorUOM</td>
+          <td>@ingredient.strengthDenominatorVal</td>
+          <td>@ingredient.strengthDenominatorUOM</td>
+        </tr>
+      }
+    </table>
+  }
+}

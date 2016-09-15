@@ -1,0 +1,15 @@
+@import com.pharmpress.common.model.dmd.Vtm
+
+@(vtm: Vtm)
+
+@_main() {
+  <h1>Virtual Therapeutic Moiety</h1>
+  <table>
+    <tr><td>ID</td><td>@vtm.id</td></tr>
+    <tr><td>Name</td><td>@vtm.name</td></tr>
+    <tr><td>Invalid</td><td>@vtm.invalid</td></tr>
+    <tr><td>Abbreviated name</td><td>@vtm.abbrevName</td></tr>
+    <tr><td>Previous ID</td><td>@vtm.prevId</td></tr>
+    <tr><td>Valid date</td><td>@vtm.validDate</td></tr>
+  </table>
+}
