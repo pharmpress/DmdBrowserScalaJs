@@ -1,13 +1,7 @@
-GET			/                       todomvc.example.TodoController.home
-GET			/api/todos              todomvc.example.TodoController.list
-PUT			/api/todos              todomvc.example.TodoController.create
-POST		/api/todos/markAll      todomvc.example.TodoController.markAll(completed: Boolean)
-POST		/api/todos/clearAll     todomvc.example.TodoController.clearAll
+GET			/                       todomvc.example.DmdController.home
 
-POST		/api/todos/:id          todomvc.example.TodoController.update(id: Long)
-DELETE		/api/todos/:id          todomvc.example.TodoController.delete(id: Long)
-
-GET     /api/dmd/:id            todomvc.example.TodoController.show(id: Long)
+GET     /vtm/:id            todomvc.example.DmdController.vtm(id: Long)
+GET     /vmp/:id            todomvc.example.DmdController.vmp(id: Long)
 
 GET         /search                 com.searchmvc.controllers.SearchController.home()
 GET         /search/:query          com.searchmvc.controllers.SearchController.search(query:String)

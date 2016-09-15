@@ -5,45 +5,45 @@ package com.pharmpress.common.model.dmd
  */
 case class Vmp(
   id: String,
-  validDate: Option[String],
-  idPrev: Option[String],
-  vtmId: Option[String],
-  invalid: Option[String],
+  validDate: Option[String] = None,
+  idPrev: Option[String] = None,
+  vtmId: Option[String] = None,
+  invalid: Option[String] = None,
   name: String,
-  abbrevName: Option[String],
+  abbrevName: Option[String] = None,
   basisOfName: String,
-  nameDate: Option[String],
-  namePrev: Option[String],
-  basisOfNamePrev: Option[String],
-  nameChangeReason: Option[String],
-  combProd: Option[String],
-  presStatus: Option[String],
-  sugarFree: Option[String],
-  glutenFree: Option[String],
-  preservativeFree: Option[String],
-  cfcFree: Option[String],
-  nonAvailable: Option[String],
-  nonAvailableDate: Option[String],
-  dfInd: Option[String],
-  udfs: Option[String],
-  udfsUOM: Option[String],
-  unitDoseUOM: Option[String],
-  ontDrugForm: Option[Seq[OntDrugForm]],
-  drugForm: Option[DrugForm],
-  drugRoute: Option[Seq[DrugRoute]],
+  nameDate: Option[String] = None,
+  namePrev: Option[String] = None,
+  basisOfNamePrev: Option[String] = None,
+  nameChangeReason: Option[String] = None,
+  combProd: Option[String] = None,
+  presStatus: Option[String] = None,
+  sugarFree: Option[String] = None,
+  glutenFree: Option[String] = None,
+  preservativeFree: Option[String] = None,
+  cfcFree: Option[String] = None,
+  nonAvailable: Option[String] = None,
+  nonAvailableDate: Option[String] = None,
+  dfInd: Option[String] = None,
+  udfs: Option[String] = None,
+  udfsUOM: Option[String] = None,
+  unitDoseUOM: Option[String] = None,
+  ontDrugForm: Option[Seq[OntDrugForm]] = None,
+  drugForm: Option[DrugForm] = None,
+  drugRoute: Option[Seq[DrugRoute]] = None,
   controlDrugInfo: ControlDrugInfo,
-  virtualProductIngredients: Option[Seq[VirtualProductIngredient]]
+  virtualProductIngredients: Option[Seq[VirtualProductIngredient]] = None
 ) extends DmdIdentifiable
 
 case class VirtualProductIngredient(
   vmpId: String,
   ingredientSubstance: Ingredient,
-  basisStrength: Option[String],
-  basisSubstance: Option[Ingredient],
-  strengthNumeratorVal: Option[String],
-  strengthNumeratorUOM: Option[String],
-  strengthDenominatorVal: Option[String],
-  strengthDenominatorUOM: Option[String]
+  basisStrength: Option[String] = None,
+  basisSubstance: Option[Ingredient] = None,
+  strengthNumeratorVal: Option[String] = None,
+  strengthNumeratorUOM: Option[String] = None,
+  strengthDenominatorVal: Option[String] = None,
+  strengthDenominatorUOM: Option[String] = None
 )
 
 case class OntDrugForm(
@@ -64,6 +64,6 @@ case class DrugRoute(
 case class ControlDrugInfo(
   vmpId: String,
   category: String,
-  categoryDate: Option[String],
-  categoryPrev: Option[String]
+  categoryDate: Option[String] = None,
+  categoryPrev: Option[String] = None
 )

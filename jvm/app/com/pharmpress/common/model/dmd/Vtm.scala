@@ -6,8 +6,8 @@ package com.pharmpress.common.model.dmd
 case class Vtm(
   id: String,
   name: String,
-  invalid: Option[String],
-  abbrevName: Option[String],
-  prevId: Option[String],
-  validDate: Option[String]
+  invalid: Option[String] = None,
+  abbrevName: Option[String] = None,
+  prevId: Option[String] = None,
+  validDate: Option[String] = None
 ) extends DmdIdentifiable
