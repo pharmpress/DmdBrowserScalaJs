@@ -32,6 +32,16 @@ object BuildAll extends Build
       run in Compile <<= (run in Compile in server)
     ).settings(commonSettings)
 
+  lazy val e2e = (project in file("e2e"))
+  .settings(commonSettings)
+  .settings(Seq(
+    libraryDependencies ++= Seq(
+      "org.scala-lang.modules" %% "scala-xml" % "1.0.5",
+      "org.scalamock" %% "scalamock-scalatest-support" % "3.1.1",
+      "org.seleniumhq.selenium" % "selenium-java" % "2.35.0" % "test"
+    )
+  ))
+
   lazy val server = todomvc.jvm
     .enablePlugins(PlayScala)
     .settings(commonSettings)

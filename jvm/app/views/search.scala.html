@@ -16,7 +16,7 @@
             </div>
         </form>
     </header>
-    <section>
+    <section id="search-results">
         <p ng-repeat="result in results"><span ng-cloak><span class="badge">{{result.type}}</span> <a ng-href="/{{result.type}}/{{result.id}}">{{result.name}}</a></span></p>
     </section>
 </section>
