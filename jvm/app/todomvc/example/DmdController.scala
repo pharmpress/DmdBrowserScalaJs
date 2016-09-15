@@ -2,7 +2,7 @@ package todomvc.example
 
 import javax.inject.{Inject, Singleton}
 
-import com.pharmpress.common.model.dmd.{ControlDrugInfo, Ingredient, VirtualProductIngredient, Vmp, Vtm}
+import com.pharmpress.common.model.dmd.{Amp, ControlDrugInfo, Ingredient, LicensedRoute, VirtualProductIngredient, Vmp, Vtm}
 import play.api.data.Form
 import play.api.data.Forms._
 import play.api.libs.concurrent.Execution.Implicits.defaultContext
@@ -49,6 +49,12 @@ class DmdController @Inject() extends Controller {
       ))
     )
     Ok(views.html.vmp(vmp))
+  }
+
+  def amp(id: Long) = Action {
+    val amp = Amp("123456", None, "amp", None, "", None, None, "", None, None, None, None, None, None, "", "",
+      None, "", None, None, Some(Seq(LicensedRoute("123456", "route1"), LicensedRoute("123456", "route2"))), None, None)
+    Ok(views.html.amp(amp))
   }
 
 }
