@@ -15,7 +15,8 @@ import scala.scalajs.js.JSON
 
 @injectable("searchService")
 class SearchService(val http: HttpService, val timeout: Timeout)
-  extends HttpClientSupport with AngularExecutionContextProvider with Service {
+  extends HttpClientSupport with AngularExecutionContextProvider with Service
+{
   require(http != null, "Missing argument 'http'.")
   require(timeout != null, "Missing argument 'timeout'.")
 
@@ -27,11 +28,14 @@ class SearchService(val http: HttpService, val timeout: Timeout)
   }
 }
 
-object SearchService {
+object SearchService
+{
 
   @injectable("searchService")
-  class Factory(http: HttpService, timeout: Timeout) extends angularjs.Factory[SearchService] {
+  class Factory(http: HttpService, timeout: Timeout) extends angularjs.Factory[SearchService]
+  {
 
     def apply(): SearchService = new SearchService(http, timeout)
   }
+
 }
