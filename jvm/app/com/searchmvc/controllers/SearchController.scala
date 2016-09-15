@@ -7,6 +7,7 @@ import com.pharmpress.dmdbrowser.service.SearchService
 import com.searchmvc.SearchResult
 import play.api.libs.json.Json
 import play.api.mvc.{Action, Controller}
+import prickle.Pickle
 
 import scala.concurrent.ExecutionContext.Implicits.global
 
@@ -28,8 +29,8 @@ class SearchController @Inject()(searchService: SearchService) extends Controlle
       results <- searchService.searchAll(query)
     } yield {
       Ok(
-        Json.toJson(
-          results.map(d => SearchResult(d.id, d.name,d match {
+        Pickle.intoString(
+            results.map(d => SearchResult(d.id, d.name,d match {
             case _:Amp => "amp"
             case _:Vmp=> "vmp"
             case _:Vtm=> "vtm"

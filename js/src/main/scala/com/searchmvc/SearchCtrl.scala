@@ -1,11 +1,9 @@
 package com.searchmvc
 
-import com.greencatsoft.angularjs.core.{HttpService, Location, Timeout}
+import com.greencatsoft.angularjs.core.{Location, Timeout}
 import com.greencatsoft.angularjs.{AbstractController, AngularExecutionContextProvider, injectable}
 import org.scalajs.dom._
 
-import scala.scalajs.js
-import scala.scalajs.js.Dynamic.literal
 import scala.scalajs.js.JSConverters._
 import scala.scalajs.js.annotation.JSExport
 import scala.util.{Failure, Success}
@@ -18,7 +16,7 @@ import scala.util.{Failure, Success}
 class SearchCtrl(
   scope: SearchScope,
   location: Location,
-  http: HttpService,
+  searchService: SearchService,
   val timeout: Timeout
 ) extends AbstractController[SearchScope](scope) with AngularExecutionContextProvider
 {
@@ -26,10 +24,9 @@ class SearchCtrl(
   @JSExport
   def search(query: String) = {
     console.info(s"search $query")
-    http.get[Array[SearchResult]]("/search/"+query).onComplete {
-      case Success(results) => {
+    searchService.searchDmd(query).onComplete {
+      case Success(results) =>
         scope.results = results.toJSArray
-      }
       case Failure(t) => handleError(t)
     }
   }

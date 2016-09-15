@@ -31,6 +31,8 @@ trait IElasticSearch {
 
   def searchForDocAsync[T](indexName: String, indexType: String, queryDef: QueryDefinition)(implicit reads: Reads[T]): Future[T]
 
+  def searchForDocsAsync[T](indexName: String, indexType: String, queryDef: QueryDefinition)(implicit reads: Reads[T]): Future[Seq[T]]
+
   /**
    * execute any ES Elastic4s DSL command
    *

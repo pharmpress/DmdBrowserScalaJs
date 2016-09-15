@@ -3,8 +3,10 @@
 @(vtm: Vtm)
 
 @_main() {
+  <div class="page-header">
   <h1>Virtual Therapeutic Moiety</h1>
-  <table>
+    </div>
+  <table class="table table-striped">
     <tr><td>ID</td><td>@vtm.id</td></tr>
     <tr><td>Name</td><td>@vtm.name</td></tr>
     <tr><td>Invalid</td><td>@vtm.invalid</td></tr>
@@ -12,4 +14,6 @@
     <tr><td>Previous ID</td><td>@vtm.prevId</td></tr>
     <tr><td>Valid date</td><td>@vtm.validDate</td></tr>
   </table>
+
+  <h2>Virtual Medicinal Products</h2>
 }

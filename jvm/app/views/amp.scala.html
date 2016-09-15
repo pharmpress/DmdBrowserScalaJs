@@ -3,8 +3,10 @@
 @(amp: Amp)
 
 @_main() {
+  <div class="page-header">
 <h1>Actual Medicinal Product</h1>
-  <table>
+    </div>
+  <table class="table table-striped">
   <tr><td>Id</td><td>@amp.id</td></tr>
   <tr><td>Invalid</td><td>@amp.invalid</td></tr>
   <tr><td>Name</td><td>@amp.name</td></tr>
@@ -20,18 +22,25 @@
   <tr><td>Ema</td><td>@amp.ema</td></tr>
   <tr><td>ParallelImport</td><td>@amp.parallelImport</td></tr>
   <tr><td>AvailRestrict</td><td>@amp.availRestrict</td></tr>
-  <tr><td>VmpId</td><td>@amp.vmpId</td></tr>
-  <tr><td>VtmId</td><td>@amp.vtmId</td></tr>
+  <tr><td>Virtual medicinal product</td><td><a href="/vmp/@amp.vmpId">@amp.vmpId</a></td></tr>
+  <tr>
+    <td>Virutal therapeutic moiety</td>
+    <td>
+      @if(amp.vtmId.nonEmpty) {
+        <a href="/vtm/@amp.vtmId.get">@amp.vtmId</a>
+      }
+    </td>
+  </tr>
   <tr><td>Supplier</td><td>@amp.supplier</td></tr>
   <tr><td>ActualProductIngredient</td><td>@amp.actualProductIngredient</td></tr>
-  <tr><td>ApplianceProductInformation</td><td>@amp.applianceProductInformation</td></tr>
   <tr><td>LicensedRoute</td><td>@amp.licensedRoute.map(_.map(_.route).mkString(", "))</td></tr>
   <tr><td>TradeFamilyGroupId</td><td>@amp.tradeFamilyGroupId</td></tr>
   <tr><td>TradeFamilyId</td><td>@amp.tradeFamilyId</td></tr>
     </table>
 
-  @if(amp.actualProductIngredient.nonEmpty) {
-    <table>
+  @if(amp.actualProductIngredient.nonEmpty && amp.actualProductIngredient.get.nonEmpty) {
+    <h2>Actual Product Ingredients</h2>
+    <table class="table table-striped">
       <tr>
         <th>Substance</th>
         <th>Strength</th>
@@ -46,4 +55,16 @@
       }
     </table>
   }
+
+  @if(amp.applianceProductInformation.nonEmpty) {
+    <h2>Appliance Product Information</h2>
+    <table>
+      <tr><td>Size/weight</td><td>@amp.applianceProductInformation.map(_.sizeWeight)</td></tr>
+      <tr><td>Colour</td><td>@amp.applianceProductInformation.map(_.colour)</td></tr>
+      <tr><td>Order number</td><td>@amp.applianceProductInformation.map(_.prodOrderNo)</td></tr>
+    </table>
+  }
+
+  <h2>Actual Medicinal Product Packs</h2>
+
 }

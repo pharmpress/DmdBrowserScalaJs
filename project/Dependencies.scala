@@ -25,7 +25,7 @@ object Dependencies
 
   object prickle
   {
-    val version = "1.1.10"
+    val version = "1.1.11"
 
     def js = "com.github.benhutchison" %%%! "prickle" % version
 
