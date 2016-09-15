@@ -1,14 +1,9 @@
 package com.searchmvc
 
-import java.security.Provider.Service
-
 import com.greencatsoft.angularjs.core.{Location, Timeout}
 import com.greencatsoft.angularjs.{AbstractController, AngularExecutionContextProvider, injectable}
 import org.scalajs.dom._
-import todomvc.example.TodoScope
 
-import scala.scalajs.js
-import scala.scalajs.js.Dynamic.literal
 import scala.scalajs.js.JSConverters._
 import scala.scalajs.js.annotation.JSExport
 import scala.util.{Failure, Success}
@@ -21,7 +16,7 @@ import scala.util.{Failure, Success}
 @injectable("searchCtrl")
 class SearchCtrl(scope: SearchScope,
                  location: Location,
-                 service: SearchServiceProxy,
+                 service: SearchService,
                  val timeout: Timeout) extends AbstractController[SearchScope](scope) with AngularExecutionContextProvider {
 
   @JSExport
