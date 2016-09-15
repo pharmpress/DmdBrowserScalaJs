@@ -1,0 +1,11 @@
+@(caseClass: Product)
+
+@_main() {
+  <h1>@caseClass.getClass.getName.toUpperCase</h1>
+  <table>
+  @for(field <- caseClass.getClass.getDeclaredFields) {
+    <tr><td>@field.getName</td><td>@field.get(caseClass)</td></tr>
+  }
+  </table>
+
+}
