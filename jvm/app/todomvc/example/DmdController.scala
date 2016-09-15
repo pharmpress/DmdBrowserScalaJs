@@ -2,6 +2,7 @@ package todomvc.example
 
 import javax.inject.{Inject, Singleton}
 
+import com.pharmpress.common.model.dmd.{Amp, ControlDrugInfo, Ingredient, LicensedRoute, VirtualProductIngredient, Vmp, Vtm}
 import com.pharmpress.common.model.dmd.{ControlDrugInfo, Ingredient, VirtualProductIngredient, Vmp, Vtm}
 import com.pharmpress.dmdbrowser.service.ContentService
 import play.api.data.Form
@@ -29,6 +30,12 @@ class DmdController @Inject() (contentService: ContentService) extends Controlle
     contentService.getVmp(id.toString).map {
       _.fold(BadRequest(s"Couldn't find VMP with id $id"))(vmp => Ok(views.html.vmp(vmp)))
     }
+  }
+
+  def amp(id: Long) = Action {
+    val amp = Amp("123456", None, "amp", None, "", None, None, "", None, None, None, None, None, None, "", "",
+      None, "", None, None, Some(Seq(LicensedRoute("123456", "route1"), LicensedRoute("123456", "route2"))), None, None)
+    Ok(views.html.amp(amp))
   }
 
 }

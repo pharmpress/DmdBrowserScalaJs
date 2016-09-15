@@ -11,5 +11,5 @@ import scala.scalajs.js.Dictionary
 @js.native
 trait SearchScope extends Scope {
 
-  var query: String = js.native
+  var results: js.Array[SearchResult] = js.native
 }
