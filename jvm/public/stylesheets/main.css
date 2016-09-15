@@ -403,6 +403,10 @@ hr {
 	border-bottom: 1px dashed #F7F7F7;
 }
 
+.label-as-badge {
+	border-radius: 1em;
+}
+
 .learn a {
 	font-weight: normal;
 	text-decoration: none;

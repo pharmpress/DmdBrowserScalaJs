@@ -24,7 +24,13 @@
       </div>
     </header>
     <section id="search-results">
-        <p ng-repeat="result in results | filter:{type: typeFilter}:true"><span ng-cloak><span class="badge">{{result.type}}</span> <a ng-href="/{{result.type}}/{{result.id}}">{{result.name}}</a></span></p>
+        <br/>
+        <p ng-repeat="result in results | filter:{type: typeFilter}:true">
+            <span ng-cloak>
+                <span ng-class="['label', {'label-danger': result.type=='vtm', 'label-warning': result.type=='vmp', 'label-primary': result.type=='vmpp', 'label-success': result.type=='amp', 'label-info': result.type=='ampp'}, 'label-as-badge']">{{result.type}}</span>
+                <a ng-href="/{{result.type}}/{{result.id}}">{{result.name}}</a>
+            </span>
+        </p>
     </section>
 </section>
 }
