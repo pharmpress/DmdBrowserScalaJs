@@ -3,6 +3,9 @@ import sbt._
 
 object Dependencies
 {
+  object apache {
+    val commonsLang3="com.hynnet" % "commons-lang3" % "3.4"
+  }
 
   object scalaJs
   {
