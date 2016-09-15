@@ -46,15 +46,13 @@ object BuildAll extends Build {
     stage <<= stage dependsOn (WebKeys.assets, fullOptJS in (client, Compile)),
     routesGenerator := InjectedRoutesGenerator,
     libraryDependencies ++= Seq(
-      db.driver,
-      db.slick.api,
-      db.slick.evolutions,
       prickle.jvm,
       scalaJs.stubs,
       js.jquery,
       js.angular,
       "org.cvogt" %% "play-json-extensions"  % "0.8.0"
-    ))
+    )++ db.elastic4s
+  )
 
   lazy val client = todomvc.js
   .enablePlugins(ScalaJSPlay)
