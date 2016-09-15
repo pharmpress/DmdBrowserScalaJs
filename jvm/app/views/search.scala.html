@@ -1,1 +1,29 @@
 @()
+
+<!DOCTYPE html>
+<html lang="en" ng-app="todomvc" data-framework="angularjs">
+    <head>
+        <meta charset="utf-8">
+        <title>AngularJS Binding for Scala.js :: TodoMVC Example</title>
+
+        <!--<link rel="stylesheet" media="screen" href="@routes.Assets.versioned("stylesheets/main.css")">-->
+        <script src="@routes.Assets.versioned("todomvc-client-jsdeps.js")"></script>
+        <script src="@routes.Assets.versioned("todomvc-client-fastopt.js")"></script>
+        <script src="@routes.Assets.versioned("todomvc-client-launcher.js")"></script>
+        <style>[ng-cloak] { display: none; }</style>
+    </head>
+    <body>
+        <section id="todoapp" ng-controller="searchCtrl">
+            <header id="header" todo-test="test">
+                <h1>DM+D Browser</h1>
+                <form id="todo-form" ng-submit="controller.search()">
+                    <input id="new-query" placeholder="What needs to be done?" ng-model="query" autofocus/>
+                    <button id="clear-completed" ng-click="controller.search(query)">search</button>
+                </form>
+            </header>
+            <section>
+                <p>Results</p>
+            </section>
+        </section>
+    </body>
+</html>

@@ -19,6 +19,8 @@ class SearchController extends Controller {
 
   def search(query: String) = Action.async {
 
+    println("query = " + query)
+
     val results = (1 to 100).map { num =>
       SearchResult(num.toString, "Result " + num)
     }
