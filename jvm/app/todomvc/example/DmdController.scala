@@ -3,14 +3,11 @@ package todomvc.example
 import javax.inject.{Inject, Singleton}
 
 import com.pharmpress.common.model.dmd.{Amp, ControlDrugInfo, Ingredient, LicensedRoute, VirtualProductIngredient, Vmp, Vtm}
-import play.api.data.Form
-import play.api.data.Forms._
-import play.api.libs.concurrent.Execution.Implicits.defaultContext
 import play.api.mvc.{Action, Controller}
 import views.html.index
 
 @Singleton
-class DmdController @Inject() extends Controller {
+class DmdController @Inject()  extends Controller {
 
   def home() = Action {
     Ok(index())
