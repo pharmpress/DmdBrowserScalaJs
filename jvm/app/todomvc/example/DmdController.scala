@@ -8,6 +8,7 @@ import com.pharmpress.dmdbrowser.service.ContentService
 import play.api.data.Form
 import play.api.data.Forms._
 import play.api.libs.concurrent.Execution.Implicits.defaultContext
+import play.api.libs.json.Json
 import play.api.mvc.{Action, Controller}
 import views.html.index
 
@@ -45,4 +46,8 @@ class DmdController @Inject() (contentService: ContentService) extends Controlle
     }
   }
 
+  def ampsByVmpParent(vmpId: String) = Action.async {
+
+    contentService.getAmpsByVmpParent(vmpId).map { amps => Ok(Json.toJson(amps)) }
+  }
 }

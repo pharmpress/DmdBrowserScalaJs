@@ -158,6 +158,15 @@ class Elastic4sServiceImpl(
     }
   }
 
+  override def searchForDocsAsync[T](indexName: String, indexType: String, queryDef: QueryDefinition)(implicit reads: Reads[T]): Future[Seq[T]] = {
+    getClient
+      .execute {
+        search in indexName -> indexType limit 1 query queryDef
+      }.map {
+      _.doGet(reads)
+    }
+  }
+
   implicit class SearchResponseJson(response: SearchResponse) {
     def doGet[T](reads: Reads[T]): Seq[T] = {
       try {
