@@ -1,4 +1,5 @@
 @import com.pharmpress.common.model.dmd.Vmp
+@import views.DmdHelper
 
 @(vmp: Vmp)
 
@@ -18,7 +19,7 @@
     <tr><td>Invalid</td><td>@vmp.invalid</td></tr>
 
     <tr><td>Name                </td><td>@vmp.name               </td></tr>
-    <tr><td>AbbrevName          </td><td>@vmp.abbrevName         </td></tr>
+    <tr><td>Abbreviated name          </td><td>@vmp.abbrevName         </td></tr>
     <tr><td>BasisOfName         </td><td>@vmp.basisOfName        </td></tr>
     <tr><td>NameDate            </td><td>@vmp.nameDate           </td></tr>
     <tr><td>NamePrev            </td><td>@vmp.namePrev           </td></tr>
@@ -26,19 +27,19 @@
     <tr><td>NameChangeReason    </td><td>@vmp.nameChangeReason   </td></tr>
     <tr><td>CombProd            </td><td>@vmp.combProd           </td></tr>
     <tr><td>PresStatus          </td><td>@vmp.presStatus         </td></tr>
-    <tr><td>SugarFree           </td><td>@vmp.sugarFree          </td></tr>
-    <tr><td>GlutenFree          </td><td>@vmp.glutenFree         </td></tr>
-    <tr><td>PreservativeFree    </td><td>@vmp.preservativeFree   </td></tr>
-    <tr><td>CfcFree             </td><td>@vmp.cfcFree            </td></tr>
-    <tr><td>NonAvailable        </td><td>@vmp.nonAvailable       </td></tr>
-    <tr><td>NonAvailableDate    </td><td>@vmp.nonAvailableDate   </td></tr>
-    <tr><td>DfInd               </td><td>@vmp.dfInd              </td></tr>
-    <tr><td>Udfs                </td><td>@vmp.udfs               </td></tr>
-    <tr><td>UdfsUOM             </td><td>@vmp.udfsUOM            </td></tr>
-    <tr><td>UnitDoseUOM         </td><td>@vmp.unitDoseUOM        </td></tr>
-    <tr><td>OntDrugForm         </td><td>@vmp.ontDrugForm        </td></tr>
-    <tr><td>DrugForm            </td><td>@vmp.drugForm.map(_.form)           </td></tr>
-    <tr><td>DrugRoute           </td><td>@vmp.drugRoute.map(_.map(_.route).mkString(", "))          </td></tr>
+    <tr><td>Sugar free?</td><td>@DmdHelper.boolean(vmp.sugarFree)</td></tr>
+    <tr><td>Gluten free?</td><td>@DmdHelper.boolean(vmp.glutenFree)</td></tr>
+    <tr><td>Preservative free?</td><td>@DmdHelper.boolean(vmp.preservativeFree)</td></tr>
+    <tr><td>CFC free?</td><td>@DmdHelper.boolean(vmp.cfcFree)</td></tr>
+    <tr><td>Non-availability indicator</td><td>@vmp.nonAvailable</td></tr>
+    <tr><td>Non-availablilty date</td><td>@vmp.nonAvailableDate</td></tr>
+    <tr><td>Dose form indicator</td><td>@vmp.dfInd</td></tr>
+    <tr><td>Unit dose form size</td><td>@vmp.udfs</td></tr>
+    <tr><td>Unit dose form units</td><td>@vmp.udfsUOM</td></tr>
+    <tr><td>Unit dose form unit of measure</td><td>@vmp.unitDoseUOM</td></tr>
+    <tr><td>Ontology form and route</td><td>@vmp.ontDrugForm.map(_.map(_.form).mkString(", "))</td></tr>
+    <tr><td>Form</td><td>@vmp.drugForm.map(_.form)</td></tr>
+    <tr><td>Route</td><td>@vmp.drugRoute.map(_.map(_.route).mkString(", "))</td></tr>
   </table>
 
   @if(vmp.virtualProductIngredients.nonEmpty) {
