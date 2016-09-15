@@ -1,7 +1,7 @@
 package com.searchmvc
 
 import com.greencatsoft.angularjs.core.Scope
-import com.pharmpress.common.model.dmd.ClientAmp
+import com.pharmpress.common.model.dmd.{IdTitle}
 import microjson.JsObject
 
 import scala.scalajs.js
@@ -12,5 +12,8 @@ import scala.scalajs.js
 @js.native
 trait DmdScope extends Scope {
 
-  var amps: js.Array[ClientAmp] = js.native
+  var vmps: js.Array[IdTitle] = js.native
+  var vmpps: js.Array[IdTitle] = js.native
+  var amps: js.Array[IdTitle] = js.native
+  var ampps: js.Array[IdTitle] = js.native
 }

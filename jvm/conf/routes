@@ -1,15 +1,18 @@
 GET         /search                 com.searchmvc.controllers.SearchController.home()
 GET			/                       com.searchmvc.controllers.SearchController.home()
 
-GET     /vtm/:id            todomvc.example.DmdController.vtm(id: Long)
-GET     /vmp/:id            todomvc.example.DmdController.vmp(id: Long)
-GET     /amp/:id            todomvc.example.DmdController.amp(id: Long)
-GET     /vmpp/:id            todomvc.example.DmdController.vmpp(id: Long)
-GET     /ampp/:id            todomvc.example.DmdController.ampp(id: Long)
-GET     /amps/:vmpId            todomvc.example.DmdController.ampsByVmpParent(vmpId: String)
+GET     /vtm/:id                    todomvc.example.DmdController.vtm(id: Long)
+GET     /vmp/:id                    todomvc.example.DmdController.vmp(id: Long)
+GET     /amp/:id                    todomvc.example.DmdController.amp(id: Long)
+GET     /vmpp/:id                   todomvc.example.DmdController.vmpp(id: Long)
+GET     /ampp/:id                   todomvc.example.DmdController.ampp(id: Long)
+GET     /amps/:vmpId                todomvc.example.DmdController.ampsByVmpParent(vmpId: String)
+GET     /vmps/:vtmId                todomvc.example.DmdController.vmpsByVtmParent(vtmId: String)
+GET     /ampps/:ampId               todomvc.example.DmdController.amppsByAmpParent(ampId: String)
+GET     /vmpps/:vmpId               todomvc.example.DmdController.vmppsByVmpParent(vmpId: String)
 
 GET         /search/:query          com.searchmvc.controllers.SearchController.search(query:String)
 GET         /search                 com.searchmvc.controllers.SearchController.home()
 
 
-GET			/assets/*file           controllers.Assets.versioned(path="/public", file: Asset)
+GET			/assets/*file        controllers.Assets.versioned(path="/public", file: Asset)

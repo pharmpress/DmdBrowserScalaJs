@@ -2,10 +2,10 @@
 
 @(vtm: Vtm)
 
-@_main() {
-  <div class="page-header">
-  <h1>Virtual Therapeutic Moiety</h1>
-    </div>
+@dmdMain {
+  <div class="page-header" ng-init="controller.loadVmps('@vtm.id')">
+    <h1>Virtual Therapeutic Moiety</h1>
+  </div>
   <table class="table table-striped">
     <tr><td>ID</td><td>@vtm.id</td></tr>
     <tr><td>Name</td><td>@vtm.name</td></tr>
@@ -16,4 +16,10 @@
   </table>
 
   <h2>Virtual Medicinal Products</h2>
+  <table class="table table-striped">
+    <tr ng-repeat="vmp in vmps">
+      <td>{{vmp.id}}</td><td><a href="/vmp/{{vmp.id}}">{{vmp.title}}</a></td>
+    </tr>
+  </table>
+
 }

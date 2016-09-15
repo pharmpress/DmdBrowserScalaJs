@@ -22,10 +22,54 @@ class DmdCtrl(
 {
 
   @JSExport
-  def init(vmpId: String) = {
+  def loadAmpsAndVmpps(vmpId: String) = {
+
+    val futureAmps = dmdService.amps(vmpId)
+    val futureVmpps = dmdService.vmpps(vmpId)
+
+    futureAmps onComplete {
+      case Success(amps) => scope.amps = amps.toJSArray
+      case Failure(t) => handleError(t)
+    }
+
+    futureVmpps onComplete {
+      case Success(vmpps) => scope.vmpps = vmpps.toJSArray
+      case Failure(t) => handleError(t)
+    }
+  }
+
+  @JSExport
+  def loadVmps(vtmId: String) = {
+    console.log("VTM id is " + vtmId)
+    dmdService.vmps(vtmId) onComplete {
+      case Success(vmps) => scope.vmps = vmps.toJSArray
+      case Failure(t) => handleError(t)
+    }
+  }
+
+  @JSExport
+  def loadVmpps(vmpId: String) = {
+    console.log("VMP id is " + vmpId)
+    dmdService.vmpps(vmpId) onComplete {
+      case Success(vmpps) => scope.vmpps = vmpps.toJSArray
+      case Failure(t) => handleError(t)
+    }
+  }
+
+  @JSExport
+  def loadAmps(vmpId: String) = {
     console.log("VMP id is " + vmpId)
     dmdService.amps(vmpId) onComplete {
       case Success(amps) => scope.amps = amps.toJSArray
+      case Failure(t) => handleError(t)
+    }
+  }
+
+  @JSExport
+  def loadAmpps(ampId: String) = {
+    console.log("AMP id is " + ampId)
+    dmdService.ampps(ampId) onComplete {
+      case Success(amps) => scope.ampps = amps.toJSArray
       case Failure(t) => handleError(t)
     }
   }

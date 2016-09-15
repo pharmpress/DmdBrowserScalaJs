@@ -3,8 +3,8 @@
 
 @(vmp: Vmp)
 
-@dmdMain(vmp) {
-  <div class="page-header">
+@dmdMain {
+  <div class="page-header" ng-init="controller.loadAmpsAndVmpps('@vmp.id')">
   <h1>Virtual Medicinal Product</h1>
     </div>
   <table class="table table-striped">
@@ -78,10 +78,14 @@
   <h2>Actual Medicinal Products</h2>
   <table class="table table-striped">
     <tr ng-repeat="amp in amps">
-      <td>{{amp.id}}</td>
+      <td>{{amp.id}}</td><td><a href="/amp/{{amp.id}}">{{amp.title}}</a></td>
     </tr>
   </table>
 
   <h2>Virtual Medicinal Product Packs</h2>
-
+  <table class="table table-striped">
+    <tr ng-repeat="vmpp in vmpps">
+      <td>{{vmpp.id}}</td><td><a href="/vmpp/{{vmpp.id}}">{{vmpp.title}}</a></td>
+    </tr>
+  </table>
 }

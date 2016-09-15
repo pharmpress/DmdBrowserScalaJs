@@ -2,6 +2,7 @@ package todomvc.example
 
 import javax.inject.{Inject, Singleton}
 
+import com.pharmpress.common.model.dmd.IdTitle
 import com.pharmpress.dmdbrowser.service.ContentService
 import play.api.libs.concurrent.Execution.Implicits.defaultContext
 import play.api.libs.json.Json
@@ -51,6 +52,21 @@ class DmdController @Inject() (contentService: ContentService) extends Controlle
 
   def ampsByVmpParent(vmpId: String) = Action.async {
 
-    contentService.getAmpsByVmpParent(vmpId).map { amps => Ok(Pickle.intoString(amps)) }
+    contentService.getAmpsByVmpParent(vmpId).map { amps => Ok(Pickle.intoString(amps.map(amp => IdTitle(amp.id, amp.name)))) }
+  }
+
+  def vmppsByVmpParent(vmpId: String) = Action.async {
+
+    contentService.getVmppsByVmpParent(vmpId).map { amps => Ok(Pickle.intoString(amps.map(vmpp => IdTitle(vmpp.id, vmpp.name)))) }
+  }
+
+  def vmpsByVtmParent(vtmId: String) = Action.async {
+
+    contentService.getVmpsByVtmParent(vtmId).map { vmps => Ok(Pickle.intoString(vmps.map(vmp => IdTitle(vmp.id, vmp.name)))) }
+  }
+
+  def amppsByAmpParent(ampId: String) = Action.async {
+
+    contentService.getAmppsByAmpParent(ampId).map { amps => Ok(Pickle.intoString(amps.map(ampp => IdTitle(ampp.id, ampp.name)))) }
   }
 }

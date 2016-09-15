@@ -2,8 +2,8 @@
 
 @(amp: Amp)
 
-@_main() {
-  <div class="page-header">
+@dmdMain {
+  <div class="page-header" ng-init="controller.loadAmpps('@amp.id')">
 <h1>Actual Medicinal Product</h1>
     </div>
   <table class="table table-striped">
@@ -66,5 +66,9 @@
   }
 
   <h2>Actual Medicinal Product Packs</h2>
-
+  <table class="table table-striped">
+    <tr ng-repeat="ampp in ampps">
+      <td>{{ampp.id}}</td><td><a href="/ampp/{{ampp.id}}">{{ampp.title}}</a></td>
+    </tr>
+  </table>
 }
