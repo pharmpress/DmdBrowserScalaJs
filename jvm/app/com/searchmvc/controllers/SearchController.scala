@@ -1,15 +1,19 @@
 package com.searchmvc.controllers
 
+import javax.inject.Inject
+
+import com.pharmpress.dmdbrowser.service.SearchService
 import com.searchmvc.SearchResult
 import play.api.libs.json.Json
 import play.api.mvc.{Action, Controller}
 
-import scala.concurrent.Future
+import scala.concurrent.ExecutionContext.Implicits.global
 
 /**
   * Created by jimbo on 15/09/16.
   */
-class SearchController extends Controller {
+class SearchController @Inject()(searchService: SearchService) extends Controller
+{
 
   implicit lazy val formatSearchResult = Json.format[SearchResult]
 
@@ -19,10 +23,14 @@ class SearchController extends Controller {
 
   def search(query: String) = Action.async {
 
-    val results = (1 to 100).map { num =>
-      SearchResult(num.toString, "Result " + num)
+    for {
+      results <- searchService.searchAll(query)
+    } yield {
+      Ok(
+        Json.toJson(
+          results.map(dmdObj => SearchResult(dmdObj.id, dmdObj.name))
+        )
+      )
     }
-
-    Future.successful(Ok(Json.toJson(results)))
   }
 }
