@@ -18,7 +18,7 @@
                 <h1>DM+D Browser</h1>
                 <form id="todo-form">
                     <input id="new-query" placeholder="What needs to be done?" ng-model="query" autofocus/>
-                    <button id="clear-completed" ng-click="controller.search(query)">search</button>
+                    <button id="clear-completed" ng-click="searchService.searchDmd(query)">search</button>
                 </form>
             </header>
             <section>

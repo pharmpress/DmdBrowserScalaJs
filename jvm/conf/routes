@@ -1,4 +1,3 @@
-GET         /search                 com.searchmvc.controllers.SearchController.home()
 GET			/                       todomvc.example.DmdController.home
 
 GET     /vtm/:id            todomvc.example.DmdController.vtm(id: Long)
@@ -6,5 +5,7 @@ GET     /vmp/:id            todomvc.example.DmdController.vmp(id: Long)
 GET     /amp/:id            todomvc.example.DmdController.amp(id: Long)
 
 GET         /search/:query          com.searchmvc.controllers.SearchController.search(query:String)
+GET         /search                 com.searchmvc.controllers.SearchController.home()
+
 
 GET			/assets/*file           controllers.Assets.versioned(path="/public", file: Asset)
