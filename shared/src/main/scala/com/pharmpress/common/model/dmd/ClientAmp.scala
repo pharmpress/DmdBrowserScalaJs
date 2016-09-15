@@ -25,20 +25,20 @@ case class ClientAmp(
                       vmpId: String,
                       vtmId: Option[String] = None,
                       supplier: String,
-                      actualProductIngredient: Seq[ClientActualProductIngredient] = Seq.empty,
+//                      actualProductIngredient: Seq[ClientActualProductIngredient] = Seq.empty,
                       applianceProductInformation: Option[ClientApplianceProductInformation] = None,
                       licensedRoute: Seq[ClientLicensedRoute] = Seq.empty,
                       tradeFamilyGroupId: Option[String] = None,
                       tradeFamilyId: Option[String] = None
                     )
 
-@JSExportAll
-case class ClientActualProductIngredient(
-                                    ampId: Option[String] = None,
-                                    ingredientSubstance: ClientIngredient,
-                                    strength: Option[String] = None,
-                                    unitOfMeasure: Option[String] = None
-                                  )
+//@JSExportAll
+//case class ClientActualProductIngredient(
+//                                    ampId: String,
+//                                    ingredientSubstance: ClientIngredient,
+//                                    strength: Option[String] = None,
+//                                    unitOfMeasure: Option[String] = None
+//                                  )
 
 @JSExportAll
 case class ClientIngredient(
@@ -50,11 +50,11 @@ case class ClientIngredient(
                      )
 
 @JSExportAll
-case class ClientLicensedRoute(ampId: Option[String] = None, route: String)
+case class ClientLicensedRoute(ampId: String, route: String)
 
 @JSExportAll
 case class ClientApplianceProductInformation(
-                                              ampId: Option[String] = None,
+//                                        ampId: Option[String] = None,
                                         sizeWeight: Option[String] = None,
                                         colour: Option[String] = None,
                                         prodOrderNo: Option[String] = None
