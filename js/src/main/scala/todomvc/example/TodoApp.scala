@@ -1,7 +1,7 @@
 package todomvc.example
 
 import com.greencatsoft.angularjs.Angular
-import com.searchmvc.{SearchCtrl, SearchService}
+import com.searchmvc.{DmdCtrl, DmdService, SearchCtrl, SearchService}
 
 import scala.scalajs.js.JSApp
 import scala.scalajs.js.annotation.JSExport
@@ -13,5 +13,7 @@ object TodoApp extends JSApp {
     Angular.module("searchmvc")
       .controller[SearchCtrl]
       .factory[SearchService.Factory]
+      .controller[DmdCtrl]
+      .factory[DmdService.Factory]
   }
 }

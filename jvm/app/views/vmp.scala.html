@@ -3,7 +3,7 @@
 
 @(vmp: Vmp)
 
-@_main() {
+@dmdMain(vmp) {
   <div class="page-header">
   <h1>Virtual Medicinal Product</h1>
     </div>
@@ -76,6 +76,11 @@
   </table>
 
   <h2>Actual Medicinal Products</h2>
+  <table class="table table-striped">
+    <tr ng-repeat="amp in amps">
+      <td>{{amp.id}}</td>
+    </tr>
+  </table>
 
   <h2>Virtual Medicinal Product Packs</h2>
 

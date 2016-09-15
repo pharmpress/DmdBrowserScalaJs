@@ -6,6 +6,7 @@ import com.pharmpress.dmdbrowser.service.ContentService
 import play.api.libs.concurrent.Execution.Implicits.defaultContext
 import play.api.libs.json.Json
 import play.api.mvc.{Action, Controller}
+import prickle.Pickle
 import views.html.index
 
 @Singleton
@@ -50,6 +51,6 @@ class DmdController @Inject() (contentService: ContentService) extends Controlle
 
   def ampsByVmpParent(vmpId: String) = Action.async {
 
-    contentService.getAmpsByVmpParent(vmpId).map { amps => Ok(Json.toJson(amps)) }
+    contentService.getAmpsByVmpParent(vmpId).map { amps => Ok(Pickle.intoString(amps)) }
   }
 }

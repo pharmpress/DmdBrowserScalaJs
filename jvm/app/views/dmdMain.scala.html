@@ -1,0 +1,9 @@
+@import com.pharmpress.common.model.dmd.Vmp
+
+@(vmp: Vmp)(content: Html)
+
+@_main() {
+    <div ng-controller="dmdCtrl" ng-init="controller.init('@vmp.id')">
+        @content
+    </div>
+}
