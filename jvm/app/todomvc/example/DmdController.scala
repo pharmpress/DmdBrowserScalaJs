@@ -2,11 +2,7 @@ package todomvc.example
 
 import javax.inject.{Inject, Singleton}
 
-import com.pharmpress.common.model.dmd.{Amp, ControlDrugInfo, Ingredient, LicensedRoute, VirtualProductIngredient, Vmp, Vtm}
-import com.pharmpress.common.model.dmd.{ControlDrugInfo, Ingredient, VirtualProductIngredient, Vmp, Vtm}
 import com.pharmpress.dmdbrowser.service.ContentService
-import play.api.data.Form
-import play.api.data.Forms._
 import play.api.libs.concurrent.Execution.Implicits.defaultContext
 import play.api.libs.json.Json
 import play.api.mvc.{Action, Controller}
