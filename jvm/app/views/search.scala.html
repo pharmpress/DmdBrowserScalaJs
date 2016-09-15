@@ -1,7 +1,7 @@
 @()
 
 <!DOCTYPE html>
-<html lang="en" ng-app="todomvc" data-framework="angularjs">
+<html lang="en" ng-app="searchmvc" data-framework="angularjs">
     <head>
         <meta charset="utf-8">
         <title>AngularJS Binding for Scala.js :: TodoMVC Example</title>
@@ -13,10 +13,10 @@
         <style>[ng-cloak] { display: none; }</style>
     </head>
     <body>
-        <section id="todoapp" ng-controller="searchCtrl">
+        <section ng-controller="searchCtrl">
             <header id="header" todo-test="test">
                 <h1>DM+D Browser</h1>
-                <form id="todo-form" ng-submit="controller.search()">
+                <form id="todo-form">
                     <input id="new-query" placeholder="What needs to be done?" ng-model="query" autofocus/>
                     <button id="clear-completed" ng-click="controller.search(query)">search</button>
                 </form>

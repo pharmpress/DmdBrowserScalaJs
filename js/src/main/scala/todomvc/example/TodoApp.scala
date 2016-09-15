@@ -1,6 +1,7 @@
 package todomvc.example
 
 import com.greencatsoft.angularjs.Angular
+import com.searchmvc.SearchCtrl
 
 import scala.scalajs.js.JSApp
 import scala.scalajs.js.annotation.JSExport
@@ -9,12 +10,7 @@ import scala.scalajs.js.annotation.JSExport
 object TodoApp extends JSApp {
 
   override def main() {
-    Angular.module("todomvc")
-      .controller[TodoCtrl]
-      .directive[TodoItemDirective]
-      .directive[EscapeDirective]
-      .directive[FocusDirective]
-      .filter[StatusFilter]
-      .factory[TaskServiceProxy.Factory]
+    Angular.module("searchmvc")
+      .controller[SearchCtrl]
   }
 }
