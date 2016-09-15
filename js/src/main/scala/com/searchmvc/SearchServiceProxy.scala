@@ -31,7 +31,7 @@ object SearchServiceProxy {
 
   @injectable("searchService")
   class Factory(http: HttpService, timeout: Timeout)
-    extends angularjs.Factory[TaskService] {
+    extends angularjs.Factory[SearchService] {
 
     override def apply(): SearchServiceProxy = new SearchServiceProxy(http, timeout)
   }

@@ -2,8 +2,8 @@ package com.searchmvc
 
 import java.security.Provider.Service
 
+import com.greencatsoft.angularjs.core.{Location, Timeout}
 import com.greencatsoft.angularjs.{AbstractController, AngularExecutionContextProvider, injectable}
-import org.scalajs.dom.Location
 import todomvc.example.TodoScope
 
 import scala.scalajs.js
@@ -21,12 +21,8 @@ import scala.util.{ Failure, Success }
 class SearchCtrl(scope: SearchScope,
                  location: Location,
                  service: SearchServiceProxy,
-                 query: String) extends AbstractController[SearchScope](scope) with AngularExecutionContextProvider {
+                 val timeout: Timeout) extends AbstractController[SearchScope](scope) with AngularExecutionContextProvider {
 
-  scope.query = js.native
 
-  service.searchDmd(query).onComplete {
-case Success(task) =>
 
-  }
 }
