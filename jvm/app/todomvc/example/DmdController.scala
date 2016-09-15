@@ -2,11 +2,7 @@ package todomvc.example
 
 import javax.inject.{Inject, Singleton}
 
-import com.pharmpress.common.model.dmd.{Amp, ControlDrugInfo, Ingredient, LicensedRoute, VirtualProductIngredient, Vmp, Vtm}
-import com.pharmpress.common.model.dmd.{ControlDrugInfo, Ingredient, VirtualProductIngredient, Vmp, Vtm}
 import com.pharmpress.dmdbrowser.service.ContentService
-import play.api.data.Form
-import play.api.data.Forms._
 import play.api.libs.concurrent.Execution.Implicits.defaultContext
 import play.api.libs.json.Json
 import play.api.mvc.{Action, Controller}
@@ -37,6 +33,12 @@ class DmdController @Inject() (contentService: ContentService) extends Controlle
 
     contentService.getAmp(id.toString).map {
       _.fold(BadRequest(s"Couldn't find AMP with id $id"))(amp => Ok(views.html.amp(amp)))
+    }
+  }
+
+  def vmpp(id: Long) = Action.async {
+    contentService.getVmpp(id.toString).map {
+      _.fold(BadRequest(s"Couldn't find VMPP with id $id"))(vmpp => Ok(views.html.vmpp(vmpp)))
     }
   }
 
