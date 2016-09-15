@@ -3,43 +3,17 @@ package com.pharmpress.elasticsearch
 import java.util.concurrent.TimeUnit
 import java.util.concurrent.atomic.AtomicInteger
 
-import akka.actor.ActorSystem
-import akka.stream.Materializer
-import akka.stream.scaladsl.{ Sink, Source }
 import com.sksamuel.elastic4s._
-import com.sksamuel.elastic4s.mappings.MappingDefinition
-import org.elasticsearch.ElasticsearchException
-import org.elasticsearch.action.ActionResponse
-import org.elasticsearch.action.admin.indices.alias.IndicesAliasesResponse
-import org.elasticsearch.action.admin.indices.create.CreateIndexResponse
-import org.elasticsearch.action.admin.indices.flush.FlushResponse
-import org.elasticsearch.action.admin.indices.refresh.RefreshResponse
-import org.elasticsearch.action.admin.indices.status.IndicesStatusResponse
-import org.elasticsearch.action.bulk.BulkResponse
 import org.elasticsearch.action.count.CountResponse
-import org.elasticsearch.action.delete.DeleteResponse
-import org.elasticsearch.action.get.{ GetResponse, MultiGetResponse }
-import org.elasticsearch.action.index.IndexResponse
 import org.elasticsearch.action.search.SearchResponse
-import org.elasticsearch.action.update.UpdateResponse
 import org.elasticsearch.client.transport.NoNodeAvailableException
-import org.elasticsearch.cluster.metadata.IndexMetaData
-import org.elasticsearch.common.hppc.cursors.ObjectCursor
-import org.elasticsearch.indices.IndexMissingException
-import org.elasticsearch.rest.action.admin.indices.alias.delete.AliasesMissingException
-import org.elasticsearch.search.{ SearchHit, SearchHits }
-import org.elasticsearch.transport.RemoteTransportException
 import play.api.libs.json._
 
-import scala.collection.JavaConversions._
 import scala.concurrent.ExecutionContext.Implicits.global
 import scala.concurrent._
 import scala.concurrent.duration._
 import scala.language.postfixOps
-import scala.util.{ Failure, Success, Try }
-
-@deprecated("use guice instead", "20/05/2015")
-trait Elastic4sService extends ElasticSearch
+import scala.util.Try
 
 class Elastic4sServiceImpl(
   clientFactory: () => ElasticClient,
@@ -48,14 +22,9 @@ class Elastic4sServiceImpl(
 ) extends IElasticSearch {
 
   import com.sksamuel.elastic4s.ElasticDsl._
-  import org.elasticsearch.search.sort.SortOrder
 
   private val Log = LoggerHelper.Logger
 
-  /**
-    * Elasticsearch limits return results by default.
-    */
-  private val UnlimitedResults = 1000000
 
   /**
     * Increase default timeout of 10 seconds as bulk load takes longer.

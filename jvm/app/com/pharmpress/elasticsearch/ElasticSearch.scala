@@ -1,44 +1,11 @@
 package com.pharmpress.elasticsearch
 
-import akka.actor.ActorSystem
-import akka.stream.Materializer
-import akka.stream.scaladsl.Source
 import com.sksamuel.elastic4s._
-import com.sksamuel.elastic4s.mappings.MappingDefinition
-import org.elasticsearch.action.admin.indices.alias.IndicesAliasesResponse
-import org.elasticsearch.action.admin.indices.create.CreateIndexResponse
-import org.elasticsearch.action.admin.indices.flush.FlushResponse
-import org.elasticsearch.action.admin.indices.refresh.RefreshResponse
-import org.elasticsearch.action.admin.indices.status.IndicesStatusResponse
-import org.elasticsearch.action.bulk.BulkResponse
 import org.elasticsearch.action.count.CountResponse
-import org.elasticsearch.action.delete.DeleteResponse
-import org.elasticsearch.action.get.{GetResponse, MultiGetResponse}
-import org.elasticsearch.action.index.IndexResponse
-import org.elasticsearch.action.search.SearchResponse
-import org.elasticsearch.cluster.metadata.IndexMetaData
 import org.elasticsearch.common.settings.ImmutableSettings
-import org.elasticsearch.search.sort.SortOrder
-import org.elasticsearch.search.{SearchHit, SearchHits}
-import play.api.libs.json.{JsValue, Reads}
+import play.api.libs.json.Reads
 
-import scala.concurrent.duration._
-import scala.concurrent.{ExecutionContext, Future}
-
-@deprecated("use guice instead", "20/05/2015")
-trait ElasticSearchClient {
-
-}
-@deprecated("use guice instead", "20/05/2015")
-trait ElasticSearchClientConfig {
-
-}
-
-@deprecated("use guice instead", "20/05/2015")
-trait ElasticSearch {
-  type IElasticSearch = com.pharmpress.elasticsearch.IElasticSearch
-  val elasticSearch: IElasticSearch
-}
+import scala.concurrent.Future
 
 // scalastyle:off number.of.methods
 trait IElasticSearch {
