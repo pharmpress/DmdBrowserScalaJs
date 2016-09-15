@@ -16,7 +16,7 @@ class SearchService @Inject()(elastic: IElasticSearch)
 {
   def searchAll(q: String) = {
     elastic.exec(
-      search in("amp", "vmp", "vtm", "ampp") query q
+      search in "dmd" types ("amp", "vmp", "vtm", "ampp") query q
     ).map {
       r =>
         r.hits.map {
