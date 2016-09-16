@@ -52,7 +52,7 @@ class DmdController @Inject() (contentService: ContentService) extends Controlle
 
   def ampsByVmpParent(vmpId: String) = Action.async {
 
-    contentService.getAmpsByVmpParent(vmpId).map { amps => Ok(Pickle.intoString(amps.map(amp => IdTitle(amp.id, amp.name)))) }
+    contentService.getAmpsByVmpParent(vmpId).map { amps => Ok(Pickle.intoString(amps.map(amp => IdTitle(amp.id, amp.desc)))) }
   }
 
   def vmppsByVmpParent(vmpId: String) = Action.async {

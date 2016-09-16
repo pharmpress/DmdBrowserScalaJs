@@ -77,14 +77,14 @@
 
   <h2>Actual Medicinal Products</h2>
   <table class="table table-striped">
-    <tr ng-repeat="amp in amps">
+    <tr ng-repeat="amp in amps | orderBy: 'title'">
       <td>{{amp.id}}</td><td><a href="/amp/{{amp.id}}">{{amp.title}}</a></td>
     </tr>
   </table>
 
   <h2>Virtual Medicinal Product Packs</h2>
   <table class="table table-striped">
-    <tr ng-repeat="vmpp in vmpps">
+    <tr ng-repeat="vmpp in vmpps | orderBy: 'title'">
       <td>{{vmpp.id}}</td><td><a href="/vmpp/{{vmpp.id}}">{{vmpp.title}}</a></td>
     </tr>
   </table>
