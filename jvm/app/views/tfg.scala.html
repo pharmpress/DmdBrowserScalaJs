@@ -1,0 +1,13 @@
+@import com.pharmpress.common.model.dmd.TradeFamilyGroup
+
+@(tfg: TradeFamilyGroup)
+
+@dmdMain {
+  <div class="page-header">
+    <h1>Trade Family Group</h1>
+  </div>
+  <table class="table table-striped">
+    <tr><td>ID</td><td>@tfg.id</td></tr>
+    <tr><td>Name</td><td>@tfg.name</td></tr>
+  </table>
+}

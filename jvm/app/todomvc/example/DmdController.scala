@@ -2,7 +2,7 @@ package todomvc.example
 
 import javax.inject.{Inject, Singleton}
 
-import com.pharmpress.common.model.dmd.IdTitle
+import com.pharmpress.common.model.dmd.{IdTitle, Vmp}
 import com.pharmpress.dmdbrowser.service.ContentService
 import play.api.libs.concurrent.Execution.Implicits.defaultContext
 import play.api.libs.json.Json
@@ -26,8 +26,8 @@ class DmdController @Inject() (contentService: ContentService) extends Controlle
 
   def vmp(id: Long) = Action.async {
 
-    contentService.getVmp(id.toString).map {
-      _.fold(BadRequest(s"Couldn't find VMP with id $id"))(vmp => Ok(views.html.vmp(vmp)))
+    contentService.getVmp(id.toString).map { v =>
+      v.fold(BadRequest(s"Couldn't find VMP with id $id"))(vmp => Ok(views.html.vmp(vmp)))
     }
   }
 
@@ -47,6 +47,18 @@ class DmdController @Inject() (contentService: ContentService) extends Controlle
   def ampp(id: Long) = Action.async {
     contentService.getAmpp(id.toString).map {
       _.fold(BadRequest(s"Couldn't find AMPP with id $id"))(ampp => Ok(views.html.ampp(ampp)))
+    }
+  }
+
+  def tf(id: Long) = Action.async {
+    contentService.getTf(id.toString).map {
+      _.fold(BadRequest(s"Couldn't find TF with id $id"))(tf => Ok(views.html.tf(tf)))
+    }
+  }
+
+  def tfg(id: Long) = Action.async {
+    contentService.getTfg(id.toString).map {
+      _.fold(BadRequest(s"Couldn't find TFG with id $id"))(tfg => Ok(views.html.tfg(tfg)))
     }
   }
 

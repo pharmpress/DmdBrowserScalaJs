@@ -2,10 +2,11 @@ package com.pharmpress.dmdbrowser.service
 
 import javax.inject.Inject
 
-import com.pharmpress.common.model.dmd.{Vtm, Vmp, Vmpp, Amp, Ampp}
+import com.pharmpress.common.model.dmd.{Amp, Ampp, TradeFamily, TradeFamilyGroup, Vmp, Vmpp, Vtm}
 import com.pharmpress.elasticsearch.IElasticSearch
 import play.api.libs.json.Reads
 import com.sksamuel.elastic4s.ElasticDsl._
+
 import scala.concurrent.Future
 
 /**
@@ -30,6 +31,8 @@ class ContentService @Inject()(elastic: IElasticSearch) {
     termQuery("ampId", ampId)
   })
   def getAmpp(id: String): Future[Option[Ampp]] = getDocById[Ampp]("ampp", id)
+  def getTf(id: String): Future[Option[TradeFamily]] = getDocById[TradeFamily]("tf", id)
+  def getTfg(id: String): Future[Option[TradeFamilyGroup]] = getDocById[TradeFamilyGroup]("tfg", id)
 
   private def getDocById[T](docType: String, id: String)(implicit reads: Reads[T]): Future[Option[T]] = {
     elastic.getDocByIdAsync[T]("dmd", docType, id)

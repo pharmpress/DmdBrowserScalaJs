@@ -4,39 +4,53 @@
 
 @dmdMain {
   <div class="page-header" ng-init="controller.loadAmpps('@amp.id')">
-<h1>Actual Medicinal Product</h1>
-    </div>
+    <h1>Actual Medicinal Product</h1>
+  </div>
   <table class="table table-striped">
-  <tr><td>Id</td><td>@amp.id</td></tr>
-  <tr><td>Invalid</td><td>@amp.invalid</td></tr>
-  <tr><td>Name</td><td>@amp.name</td></tr>
-  <tr><td>AbbrevName</td><td>@amp.abbrevName</td></tr>
-  <tr><td>Desc</td><td>@amp.desc</td></tr>
-  <tr><td>NameDate</td><td>@amp.nameDate</td></tr>
-  <tr><td>NamePrev</td><td>@amp.namePrev</td></tr>
-  <tr><td>LicAuth</td><td>@amp.licAuth</td></tr>
-  <tr><td>LicAuthChange</td><td>@amp.licAuthChange</td></tr>
-  <tr><td>LicAuthDate</td><td>@amp.licAuthDate</td></tr>
-  <tr><td>CombProd</td><td>@amp.combProd</td></tr>
-  <tr><td>Flavour</td><td>@amp.flavour</td></tr>
-  <tr><td>Ema</td><td>@amp.ema</td></tr>
-  <tr><td>ParallelImport</td><td>@amp.parallelImport</td></tr>
-  <tr><td>AvailRestrict</td><td>@amp.availRestrict</td></tr>
-  <tr><td>Virtual medicinal product</td><td><a href="/vmp/@amp.vmpId">@amp.vmpId</a></td></tr>
-  <tr>
-    <td>Virutal therapeutic moiety</td>
-    <td>
-      @if(amp.vtmId.nonEmpty) {
-        <a href="/vtm/@amp.vtmId.get">@amp.vtmId</a>
+    <tr><td>Id</td><td>@amp.id</td></tr>
+    <tr><td>Invalid</td><td>@amp.invalid</td></tr>
+    <tr><td>Name</td><td>@amp.name</td></tr>
+    <tr><td>AbbrevName</td><td>@amp.abbrevName</td></tr>
+    <tr><td>Desc</td><td>@amp.desc</td></tr>
+    <tr><td>NameDate</td><td>@amp.nameDate</td></tr>
+    <tr><td>NamePrev</td><td>@amp.namePrev</td></tr>
+    <tr><td>LicAuth</td><td>@amp.licAuth</td></tr>
+    <tr><td>LicAuthChange</td><td>@amp.licAuthChange</td></tr>
+    <tr><td>LicAuthDate</td><td>@amp.licAuthDate</td></tr>
+    <tr><td>CombProd</td><td>@amp.combProd</td></tr>
+    <tr><td>Flavour</td><td>@amp.flavour</td></tr>
+    <tr><td>Ema</td><td>@amp.ema</td></tr>
+    <tr><td>ParallelImport</td><td>@amp.parallelImport</td></tr>
+    <tr><td>AvailRestrict</td><td>@amp.availRestrict</td></tr>
+    <tr><td>Virtual medicinal product</td><td><a href="/vmp/@amp.vmpId">@amp.vmpId</a></td></tr>
+    <tr>
+      <td>Virutal therapeutic moiety</td>
+      <td>
+        @if(amp.vtmId.nonEmpty) {
+          <a href="/vtm/@amp.vtmId.get">@amp.vtmId</a>
+        }
+      </td>
+    </tr>
+    <tr><td>Supplier</td><td>@amp.supplier</td></tr>
+    <tr><td>ActualProductIngredient</td><td>@amp.actualProductIngredient</td></tr>
+    <tr><td>LicensedRoute</td><td>@amp.licensedRoute.map(_.map(_.route).mkString(", "))</td></tr>
+    <tr>
+      <td>Trade Family Group</td>
+      <td>
+        @if(amp.tradeFamilyGroupId.nonEmpty) {
+          <a href="/tfg/@amp.tradeFamilyGroupId.get">@amp.tradeFamilyGroupId</a>
+        }
+      </td>
+    </tr>
+    <tr>
+      <td>Trade Family</td>
+      <td>
+      @if(amp.tradeFamilyId.nonEmpty) {
+        <a href="/tf/@amp.tradeFamilyId.get">@amp.tradeFamilyId</a>
       }
-    </td>
-  </tr>
-  <tr><td>Supplier</td><td>@amp.supplier</td></tr>
-  <tr><td>ActualProductIngredient</td><td>@amp.actualProductIngredient</td></tr>
-  <tr><td>LicensedRoute</td><td>@amp.licensedRoute.map(_.map(_.route).mkString(", "))</td></tr>
-  <tr><td>TradeFamilyGroupId</td><td>@amp.tradeFamilyGroupId</td></tr>
-  <tr><td>TradeFamilyId</td><td>@amp.tradeFamilyId</td></tr>
-    </table>
+      </td>
+    </tr>
+  </table>
 
   @if(amp.actualProductIngredient.nonEmpty && amp.actualProductIngredient.get.nonEmpty) {
     <h2>Actual Product Ingredients</h2>

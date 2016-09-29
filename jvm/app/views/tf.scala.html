@@ -1,0 +1,21 @@
+@import com.pharmpress.common.model.dmd.TradeFamily
+
+@(tf: TradeFamily)
+
+@dmdMain {
+  <div class="page-header">
+    <h1>Trade Family</h1>
+  </div>
+  <table class="table table-striped">
+    <tr><td>ID</td><td>@tf.id</td></tr>
+    <tr><td>Name</td><td>@tf.name</td></tr>
+    <tr>
+      <td>Trade Family Group</td>
+      <td>
+        @if(tf.groupId.nonEmpty) {
+          <a href="/tfg/@tf.groupId.get">@tf.groupId</a>
+        }
+      </td>
+    </tr>
+  </table>
+}
