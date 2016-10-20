@@ -1,10 +1,10 @@
 @import com.pharmpress.common.model.dmd.Vmp
 @import views.DmdHelper
 
-@(vmp: Vmp)
+@(dmd: String, vmp: Vmp)
 
 @dmdMain {
-  <div class="page-header" ng-init="controller.loadAmpsAndVmpps('@vmp.id')">
+  <div class="page-header" ng-init="controller.loadAmpsAndVmpps('@dmd', '@vmp.id')">
   <h1>Virtual Medicinal Product</h1>
     </div>
   <table class="table table-striped">
@@ -13,7 +13,7 @@
     <tr><td>Previous ID</td><td>@vmp.idPrev</td></tr>
     <tr><td>Virtual therapeutic moiety</td><td>
       @if(vmp.vtmId.nonEmpty) {
-        <a href="/vtm/@vmp.vtmId.get">@vmp.vtmId</a>
+        <a href="/@dmd/vtm/@vmp.vtmId.get">@vmp.vtmId</a>
       }
     </td></tr>
     <tr><td>Invalid</td><td>@vmp.invalid</td></tr>
@@ -78,14 +78,14 @@
   <h2>Actual Medicinal Products</h2>
   <table class="table table-striped">
     <tr ng-repeat="amp in amps | orderBy: 'title'">
-      <td>{{amp.id}}</td><td><a href="/amp/{{amp.id}}">{{amp.title}}</a></td>
+      <td>{{amp.id}}</td><td><a href="/@dmd/amp/{{amp.id}}">{{amp.title}}</a></td>
     </tr>
   </table>
 
   <h2>Virtual Medicinal Product Packs</h2>
   <table class="table table-striped">
     <tr ng-repeat="vmpp in vmpps | orderBy: 'title'">
-      <td>{{vmpp.id}}</td><td><a href="/vmpp/{{vmpp.id}}">{{vmpp.title}}</a></td>
+      <td>{{vmpp.id}}</td><td><a href="/@dmd/vmpp/{{vmpp.id}}">{{vmpp.title}}</a></td>
     </tr>
   </table>
 }

@@ -10,6 +10,7 @@ import play.api.libs.json.Json
 
 import scala.concurrent.ExecutionContext.Implicits._
 import scala.concurrent.Future
+import collection.JavaConverters._
 
 /**
   * @author kostas.kougios
@@ -17,12 +18,12 @@ import scala.concurrent.Future
   */
 class SearchService @Inject()(elastic: IElasticSearch)
 {
-  def searchAll(q: String): Future[Seq[DmdIdentifiable]] = {
+  def searchAll(dmd: String, q: String): Future[Seq[DmdIdentifiable]] = {
 
     if(NumberUtils.isNumber(q)){
       for {
         doc<- elastic.exec(
-          get id q from "dmd"
+          get id q from dmd
         ).map {
           g=>
             if(g.isExists)
@@ -31,16 +32,16 @@ class SearchService @Inject()(elastic: IElasticSearch)
         }
       } yield {
         doc match {
-          case Some(dmd) => Seq(dmd)
-          case None => freeTextSearch(q).await
+          case Some(dmdDoc) => Seq(dmdDoc)
+          case None => freeTextSearch(dmd, q).await
         }
       }
-    } else freeTextSearch(q)
+    } else freeTextSearch(dmd, q)
   }
 
-  private def freeTextSearch(q: String): Future[Seq[DmdIdentifiable]] = {
+  private def freeTextSearch(dmd: String, q: String): Future[Seq[DmdIdentifiable]] = {
     elastic.exec(
-      search in "dmd" types("amp", "vmp", "vmpp", "vtm", "ampp", "tf") query q size 10000
+      search in dmd types("amp", "vmp", "vmpp", "vtm", "ampp", "tf") query q size 10000
     ).map {
       r =>
         r.hits.map {
@@ -48,6 +49,10 @@ class SearchService @Inject()(elastic: IElasticSearch)
             toDomain(hit.`type`,hit.source)
         }
     }
+  }
+
+  def dmdIndexes(): Future[Seq[String]] = {
+    elastic.getClient.execute(get segments "dmd_2*").map(_.getIndices.keySet().asScala.toSeq.sorted.reverse)
   }
 
   private def toDomain(tpe:String,source:Array[Byte]) =

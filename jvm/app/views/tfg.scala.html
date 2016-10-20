@@ -1,13 +1,27 @@
 @import com.pharmpress.common.model.dmd.TradeFamilyGroup
 
-@(tfg: TradeFamilyGroup)
+@(dmd: String, tfg: TradeFamilyGroup)
 
 @dmdMain {
-  <div class="page-header">
+  <div class="page-header" ng-init="controller.loadAmpsForTradeFamilyGroup('@dmd', '@tfg.id')">
     <h1>Trade Family Group</h1>
   </div>
   <table class="table table-striped">
     <tr><td>ID</td><td>@tfg.id</td></tr>
     <tr><td>Name</td><td>@tfg.name</td></tr>
+  </table>
+
+  <h2>Trade Families</h2>
+  <table class="table table-striped">
+    <tr ng-repeat="tf in tfs | orderBy: 'title'">
+      <td>{{tf.id}}</td><td><a href="/@dmd/tf/{{tf.id}}">{{tf.title}}</a></td>
+    </tr>
+  </table>
+
+  <h2>Actual Medicinal Products</h2>
+  <table class="table table-striped">
+    <tr ng-repeat="amp in amps | orderBy: 'title'">
+      <td>{{amp.id}}</td><td><a href="/@dmd/amp/{{amp.id}}">{{amp.title}}</a></td>
+    </tr>
   </table>
 }

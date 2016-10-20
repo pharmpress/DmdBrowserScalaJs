@@ -22,9 +22,10 @@ class SearchCtrl(
 {
 
   @JSExport
-  def search(query: String) = {
+  def search(dmd: String, query: String) = {
     console.info(s"search $query")
-    searchService.searchDmd(query).onComplete {
+    scope.results = Seq.empty.toJSArray
+    searchService.searchDmd(dmd, query).onComplete {
       case Success(results) =>
         scope.results = results.toJSArray
       case Failure(t) => handleError(t)

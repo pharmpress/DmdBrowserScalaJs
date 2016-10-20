@@ -20,9 +20,9 @@ class SearchService(val http: HttpService, val timeout: Timeout)
   require(http != null, "Missing argument 'http'.")
   require(timeout != null, "Missing argument 'timeout'.")
 
-  def searchDmd(query: String): Future[Seq[SearchResult]] = flatten {
+  def searchDmd(dmd: String, query: String): Future[Seq[SearchResult]] = flatten {
     // Append a timestamp to prevent some old browsers from caching the result.
-    httpGet("/search/" + query)
+    httpGet("/search/" + dmd + "/" + query)
       .map(JSON.stringify(_))
       .map(Unpickle[Seq[SearchResult]].fromString(_))
   }

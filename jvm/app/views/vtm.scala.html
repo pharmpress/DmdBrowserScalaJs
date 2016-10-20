@@ -1,9 +1,9 @@
 @import com.pharmpress.common.model.dmd.Vtm
 
-@(vtm: Vtm)
+@(dmd: String, vtm: Vtm)
 
 @dmdMain {
-  <div class="page-header" ng-init="controller.loadVmps('@vtm.id')">
+  <div class="page-header" ng-init="controller.loadVmps('@dmd', '@vtm.id')">
     <h1>Virtual Therapeutic Moiety</h1>
   </div>
   <table class="table table-striped">
@@ -18,7 +18,7 @@
   <h2>Virtual Medicinal Products</h2>
   <table class="table table-striped">
     <tr ng-repeat="vmp in vmps">
-      <td>{{vmp.id}}</td><td><a href="/vmp/{{vmp.id}}">{{vmp.title}}</a></td>
+      <td>{{vmp.id}}</td><td><a href="/@dmd/vmp/{{vmp.id}}">{{vmp.title}}</a></td>
     </tr>
   </table>
 

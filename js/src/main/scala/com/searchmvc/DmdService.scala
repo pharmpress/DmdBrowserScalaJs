@@ -20,30 +20,44 @@ class DmdService(val http: HttpService, val timeout: Timeout)
   require(http != null, "Missing argument 'http'.")
   require(timeout != null, "Missing argument 'timeout'.")
 
-  def vmps(vtmId: String): Future[Seq[IdTitle]] = flatten {
+  def vmps(dmd: String, vtmId: String): Future[Seq[IdTitle]] = flatten {
     // Append a timestamp to prevent some old browsers from caching the result.
-    httpGet("/vmps/" + vtmId)
+    httpGet("/" + dmd + "/vmps/" + vtmId)
       .map(JSON.stringify(_))
       .map(Unpickle[Seq[IdTitle]].fromString(_))
   }
 
-  def vmpps(vmpId: String): Future[Seq[IdTitle]] = flatten {
+  def vmpps(dmd: String, vmpId: String): Future[Seq[IdTitle]] = flatten {
     // Append a timestamp to prevent some old browsers from caching the result.
-    httpGet("/vmpps/" + vmpId)
+    httpGet("/" + dmd + "/vmpps/" + vmpId)
       .map(JSON.stringify(_))
       .map(Unpickle[Seq[IdTitle]].fromString(_))
   }
 
-  def amps(vmpId: String): Future[Seq[IdTitle]] = flatten {
+  def amps(dmd: String, vmpId: String): Future[Seq[IdTitle]] = flatten {
     // Append a timestamp to prevent some old browsers from caching the result.
-    httpGet("/amps/" + vmpId)
+    httpGet("/" + dmd + "/amps/" + vmpId)
       .map(JSON.stringify(_))
       .map(Unpickle[Seq[IdTitle]].fromString(_))
   }
 
-  def ampps(ampId: String): Future[Seq[IdTitle]] = flatten {
+  def ampsForTradeFamily(dmd: String, tfId: String): Future[Seq[IdTitle]] = flatten {
     // Append a timestamp to prevent some old browsers from caching the result.
-    httpGet("/ampps/" + ampId)
+    httpGet("/" + dmd + "/ampsFromTf/" + tfId)
+        .map(JSON.stringify(_))
+        .map(Unpickle[Seq[IdTitle]].fromString(_))
+  }
+
+  def ampsForTradeFamilyGroup(dmd: String, tfgId: String): Future[Seq[IdTitle]] = flatten {
+    // Append a timestamp to prevent some old browsers from caching the result.
+    httpGet("/" + dmd + "/ampsFromTfg/" + tfgId)
+        .map(JSON.stringify(_))
+        .map(Unpickle[Seq[IdTitle]].fromString(_))
+  }
+
+  def ampps(dmd: String, ampId: String): Future[Seq[IdTitle]] = flatten {
+    // Append a timestamp to prevent some old browsers from caching the result.
+    httpGet("/" + dmd + "/ampps/" + ampId)
       .map(JSON.stringify(_))
       .map(Unpickle[Seq[IdTitle]].fromString(_))
   }

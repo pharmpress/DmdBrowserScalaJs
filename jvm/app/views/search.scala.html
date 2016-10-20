@@ -1,37 +1,44 @@
-@()
+@(indexes: Seq[String])
 
 @_main() {
 
 <section ng-controller="searchCtrl">
-    <header id="header" todo-test="test">
-        <div class="page-header">
-            <h1>Search</h1>
+  <header id="header" todo-test="test">
+    <div class="page-header">
+      <h1>Search</h1>
+    </div>
+    <form id="todo-form" class="form-inline">
+      <div class="form-group">
+        <select class="form-control" ng-model="dmd">
+          @for(index <- indexes) {
+            <option value="@index">@index</option>
+          }
+        </select>
+        <div class="input-group">
+          <input type="text" class="form-control" id="new-query" placeholder="Enter DM+D search term" ng-model="query" ng-change="controller.search(dmd, query)" ng-model-options='{ debounce: 250 }' autofocus/>
+          <span class="input-group-btn">
+            <button id="clear-completed" class="btn btn-default" type="submit" ng-click="controller.search(dmd, query)">Search</button>
+          </span>
         </div>
-        <form id="todo-form">
-            <div class="input-group">
-                <input type="text" class="form-control" id="new-query" placeholder="Enter DM+D search term" ng-model="query" ng-change="controller.search(query)" ng-model-options='{ debounce: 250 }' autofocus/>
-                <span class="input-group-btn">
-                    <button id="clear-completed" class="btn btn-default" type="submit" ng-click="controller.search(query)">search</button>
-                </span>
-            </div>
-        </form>
-      <div class="btn-group" data-toggle="buttons">
-        <a href="javascript:void(0)" ng-click="typeFilter = 'vtm'" ng-class="{ 'active' : button == 'vtm' }" class="btn btn-default">VTM <span class="badge">{{(results | filter:{type: 'vtm'}:true).length}}</span></a>
-        <a href="javascript:void(0)" ng-click="typeFilter = 'vmp'" ng-class="{ 'active' : button == 'vmp' }" class="btn btn-default">VMP <span class="badge">{{(results | filter:{type: 'vmp'}:true).length}}</span></a>
-        <a href="javascript:void(0)" ng-click="typeFilter = 'vmpp'" ng-class="{ 'active' : button == 'vmpp' }" class="btn btn-default">VMPP <span class="badge">{{(results | filter:{type: 'vmpp'}:true).length}}</span></a>
-        <a href="javascript:void(0)" ng-click="typeFilter = 'amp'" ng-class="{ 'active' : button == 'amp' }" class="btn btn-default">AMP <span class="badge">{{(results | filter:{type: 'amp'}:true).length}}</span></a>
-        <a href="javascript:void(0)" ng-click="typeFilter = 'ampp'" ng-class="{ 'active' : button == 'ampp' }" class="btn btn-default">AMPP <span class="badge">{{(results | filter:{type: 'ampp'}:true).length}}</span></a>
-        <a href="javascript:void(0)" ng-click="typeFilter = 'tf'" ng-class="{ 'active' : button == 'tf' }" class="btn btn-default">Trade Family <span class="badge">{{(results | filter:{type: 'tf'}:true).length}}</span></a>
       </div>
-    </header>
-    <section id="search-results">
-        <br/>
-        <p ng-repeat="result in results | filter:{type: typeFilter}:true">
-            <span ng-cloak>
-                <span ng-class="['label', {'label-danger': result.type=='vtm', 'label-warning': result.type=='vmp', 'label-primary': result.type=='vmpp', 'label-success': result.type=='amp', 'label-info': result.type=='ampp', 'label-default': result.type=='tf'}, 'label-as-badge']">{{result.type}}</span>
-                <a ng-href="/{{result.type}}/{{result.id}}">{{result.name}}</a>
-            </span>
-        </p>
-    </section>
+    </form>
+    <div class="btn-group" data-toggle="buttons">
+      <a href="javascript:void(0)" ng-click="typeFilter = 'vtm'" ng-class="{ 'active' : button == 'vtm' }" class="btn btn-default">VTM <span class="badge">{{(results | filter:{type: 'vtm'}:true).length}}</span></a>
+      <a href="javascript:void(0)" ng-click="typeFilter = 'vmp'" ng-class="{ 'active' : button == 'vmp' }" class="btn btn-default">VMP <span class="badge">{{(results | filter:{type: 'vmp'}:true).length}}</span></a>
+      <a href="javascript:void(0)" ng-click="typeFilter = 'vmpp'" ng-class="{ 'active' : button == 'vmpp' }" class="btn btn-default">VMPP <span class="badge">{{(results | filter:{type: 'vmpp'}:true).length}}</span></a>
+      <a href="javascript:void(0)" ng-click="typeFilter = 'amp'" ng-class="{ 'active' : button == 'amp' }" class="btn btn-default">AMP <span class="badge">{{(results | filter:{type: 'amp'}:true).length}}</span></a>
+      <a href="javascript:void(0)" ng-click="typeFilter = 'ampp'" ng-class="{ 'active' : button == 'ampp' }" class="btn btn-default">AMPP <span class="badge">{{(results | filter:{type: 'ampp'}:true).length}}</span></a>
+      <a href="javascript:void(0)" ng-click="typeFilter = 'tf'" ng-class="{ 'active' : button == 'tf' }" class="btn btn-default">Trade Family <span class="badge">{{(results | filter:{type: 'tf'}:true).length}}</span></a>
+    </div>
+  </header>
+  <section id="search-results">
+    <br/>
+    <p ng-repeat="result in results | filter:{type: typeFilter}:true">
+      <span ng-cloak>
+        <span ng-class="['label', {'label-danger': result.type=='vtm', 'label-warning': result.type=='vmp', 'label-primary': result.type=='vmpp', 'label-success': result.type=='amp', 'label-info': result.type=='ampp', 'label-default': result.type=='tf'}, 'label-as-badge']">{{result.type}}</span>
+        <a ng-href="/{{dmd}}/{{result.type}}/{{result.id}}">{{result.name}}</a>
+      </span>
+    </p>
+  </section>
 </section>
 }

@@ -19,13 +19,17 @@ class SearchController @Inject()(searchService: SearchService) extends Controlle
 
   implicit lazy val formatSearchResult = Json.format[SearchResult]
 
-  def home() = Action {
-    Ok(views.html.search())
+  def home() = Action.async {
+    for {
+      indexes <- searchService.dmdIndexes()
+    } yield {
+      Ok(views.html.search(indexes))
+    }
   }
 
-  def search(query: String) = Action.async {
+  def search(dmd: String, query: String) = Action.async {
     for {
-      results <- searchService.searchAll(query)
+      results <- searchService.searchAll(dmd, query)
     } yield {
       Ok(
         Pickle.intoString(

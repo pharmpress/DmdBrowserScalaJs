@@ -1,6 +1,6 @@
 @import com.pharmpress.common.model.dmd.Ampp
 
-@(ampp: Ampp)
+@(dmd: String, ampp: Ampp)
 
 @_main() {
   <div class="page-header">
@@ -11,14 +11,14 @@
   <tr><td>invalid</td><td>@ampp.invalid</td></tr>
   <tr><td>name</td><td>@ampp.name</td></tr>
   <tr><td>abbrevName</td><td>@ampp.abbrevName</td></tr>
-  <tr><td>Actual medicinal product</td><td><a href="/amp/@ampp.ampId">@ampp.ampId</a></td></tr>
-  <tr><td>Virtual medicinal product pack</td><td><a href="/vmpp/@ampp.vmppId">@ampp.vmppId</a></td></tr>
-  <tr><td>Virtual medicinal product</td><td><a href="/vmp/@ampp.vmpId">@ampp.vmpId</a></td></tr>
+  <tr><td>Actual medicinal product</td><td><a href="/@dmd/amp/@ampp.ampId">@ampp.ampId</a></td></tr>
+  <tr><td>Virtual medicinal product pack</td><td><a href="/@dmd/vmpp/@ampp.vmppId">@ampp.vmppId</a></td></tr>
+  <tr><td>Virtual medicinal product</td><td><a href="/@dmd/vmp/@ampp.vmpId">@ampp.vmpId</a></td></tr>
     <tr>
       <td>Virutal therapeutic moiety</td>
       <td>
       @if(ampp.vtmId.nonEmpty) {
-        <a href="/vtm/@ampp.vtmId.get">@ampp.vtmId</a>
+        <a href="/@dmd/vtm/@ampp.vtmId.get">@ampp.vtmId</a>
       }
       </td>
     </tr>

@@ -22,10 +22,10 @@ class DmdCtrl(
 {
 
   @JSExport
-  def loadAmpsAndVmpps(vmpId: String) = {
+  def loadAmpsAndVmpps(dmd: String, vmpId: String) = {
 
-    val futureAmps = dmdService.amps(vmpId)
-    val futureVmpps = dmdService.vmpps(vmpId)
+    val futureAmps = dmdService.amps(dmd, vmpId)
+    val futureVmpps = dmdService.vmpps(dmd, vmpId)
 
     futureAmps onComplete {
       case Success(amps) => scope.amps = amps.toJSArray
@@ -39,36 +39,54 @@ class DmdCtrl(
   }
 
   @JSExport
-  def loadVmps(vtmId: String) = {
+  def loadVmps(dmd: String, vtmId: String) = {
     console.log("VTM id is " + vtmId)
-    dmdService.vmps(vtmId) onComplete {
+    dmdService.vmps(dmd, vtmId) onComplete {
       case Success(vmps) => scope.vmps = vmps.toJSArray
       case Failure(t) => handleError(t)
     }
   }
 
   @JSExport
-  def loadVmpps(vmpId: String) = {
+  def loadVmpps(dmd: String, vmpId: String) = {
     console.log("VMP id is " + vmpId)
-    dmdService.vmpps(vmpId) onComplete {
+    dmdService.vmpps(dmd, vmpId) onComplete {
       case Success(vmpps) => scope.vmpps = vmpps.toJSArray
       case Failure(t) => handleError(t)
     }
   }
 
   @JSExport
-  def loadAmps(vmpId: String) = {
+  def loadAmps(dmd: String, vmpId: String) = {
     console.log("VMP id is " + vmpId)
-    dmdService.amps(vmpId) onComplete {
+    dmdService.amps(dmd, vmpId) onComplete {
       case Success(amps) => scope.amps = amps.toJSArray
       case Failure(t) => handleError(t)
     }
   }
 
   @JSExport
-  def loadAmpps(ampId: String) = {
+  def loadAmpsForTradeFamily(dmd: String, tfId: String) = {
+    console.log("TF id is " + tfId)
+    dmdService.ampsForTradeFamily(dmd, tfId) onComplete {
+      case Success(amps) => scope.amps = amps.toJSArray
+      case Failure(t) => handleError(t)
+    }
+  }
+
+  @JSExport
+  def loadAmpsForTradeFamilyGroup(dmd: String, tfgId: String) = {
+    console.log("TFG id is " + tfgId)
+    dmdService.ampsForTradeFamilyGroup(dmd, tfgId) onComplete {
+      case Success(amps) => scope.amps = amps.toJSArray
+      case Failure(t) => handleError(t)
+    }
+  }
+
+  @JSExport
+  def loadAmpps(dmd: String, ampId: String) = {
     console.log("AMP id is " + ampId)
-    dmdService.ampps(ampId) onComplete {
+    dmdService.ampps(dmd, ampId) onComplete {
       case Success(amps) => scope.ampps = amps.toJSArray
       case Failure(t) => handleError(t)
     }

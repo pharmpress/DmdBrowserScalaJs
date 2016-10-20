@@ -1,21 +1,21 @@
 @import com.pharmpress.common.model.dmd.Vmpp
 
-@(vmpp: Vmpp)
+@(dmd: String, vmpp: Vmpp)
 
 @_main() {
-  <div class="page-header">
+  <div class="page-header" ng-init="controller.loadAmpps('@dmd', '@vmpp.id')">
   <h1>Virtual Medicinal Product Pack</h1>
     </div>
   <table class="table table-striped">
     <tr><td>id</td><td>@vmpp.id</td></tr>
     <tr><td>invalid</td><td>@vmpp.invalid</td></tr>
     <tr><td>name</td><td>@vmpp.name</td></tr>
-    <tr><td>Virtual medicinal product</td><td><a href="/vmp/@vmpp.vmpId">@vmpp.vmpId</a></td></tr>
+    <tr><td>Virtual medicinal product</td><td><a href="/@dmd/vmp/@vmpp.vmpId">@vmpp.vmpId</a></td></tr>
     <tr>
       <td>Virtual therapeutic moiety</td>
       <td>
       @if(vmpp.vtmId.nonEmpty) {
-        <a href="/vtm/@vmpp.vtmId.get">@vmpp.vtmId</a>
+        <a href="/@dmd/vtm/@vmpp.vtmId.get">@vmpp.vtmId</a>
       }
       </td>
     </tr>
@@ -35,5 +35,10 @@
   }
 
   <h2>Actual Medicinal Product Packs</h2>
+  <table class="table table-striped">
+    <tr ng-repeat="ampp in ampps">
+      <td>{{ampp.id}}</td><td><a href="/@dmd/ampp/{{ampp.id}}">{{ampp.title}}</a></td>
+    </tr>
+  </table>
 
 }
