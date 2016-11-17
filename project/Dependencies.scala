@@ -11,7 +11,7 @@ object Dependencies
   {
     def stubs = "org.scala-js" %% "scalajs-stubs" % scalaJSVersion
 
-    def angular = "com.greencatsoft" %%%! "scalajs-angular" % "0.8-SNAPSHOT"
+    def angular = "com.greencatsoft" %%%! "scalajs-angular" % "0.7"
 
     def jquery = "be.doeraene" %%%! "scalajs-jquery" % "0.9.0"
   }
