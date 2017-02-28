@@ -32,16 +32,6 @@ object BuildAll extends Build
       run in Compile <<= (run in Compile in server)
     ).settings(commonSettings)
 
-  lazy val e2e = (project in file("e2e"))
-  .settings(commonSettings)
-  .settings(Seq(
-    libraryDependencies ++= Seq(
-      "org.scala-lang.modules" %% "scala-xml" % "1.0.5",
-      "org.scalamock" %% "scalamock-scalatest-support" % "3.1.1",
-      "org.seleniumhq.selenium" % "selenium-java" % "2.35.0" % "test"
-    )
-  ))
-
   lazy val server = todomvc.jvm
     .enablePlugins(PlayScala)
     .settings(commonSettings)
@@ -60,7 +50,8 @@ object BuildAll extends Build
         js.jquery,
         js.angular,
         "org.cvogt" %% "play-json-extensions" % "0.8.0",
-        apache.commonsLang3
+        apache.commonsLang3,
+        "org.scalatest" %% "scalatest" % "3.0.1" % Test
       ) ++ db.elastic4s
     )
 
