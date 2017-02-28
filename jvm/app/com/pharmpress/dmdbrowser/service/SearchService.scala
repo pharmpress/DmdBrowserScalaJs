@@ -39,6 +39,20 @@ class SearchService @Inject()(elastic: IElasticSearch)
     } else freeTextSearch(dmd, q)
   }
 
+  def getPossibleForm(dmd: String, q: String): Future[Option[String]] = {
+    elastic.exec(
+      search in dmd -> "vmp" query {
+        must {
+          matchQuery("drugForm.form", q)
+        }
+      } fields "drugForm.form" size 1
+    ).map {
+      _.hits.map {
+        _.fields("drugForm.form").getValue[String]
+      }.headOption
+    }
+  }
+
   private def freeTextSearch(dmd: String, q: String): Future[Seq[DmdIdentifiable]] = {
     elastic.exec(
       search in dmd types("amp", "vmp", "vmpp", "vtm", "ampp", "tf") query q size 10000
